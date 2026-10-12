@@ -74,6 +74,9 @@
       <symbol id="i-insta" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z"/><path d="M17.5 6.5h.01"/></symbol>
       <symbol id="i-move" viewBox="0 0 24 24"><path d="m18 8 4 4-4 4"/><path d="m6 8-4 4 4 4"/><path d="M2 12h20"/></symbol>
       <symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M9.9 15.5A2 2 0 0 0 8.5 14.1l-6.1-1.6a.5.5 0 0 1 0-1l6.1-1.6a2 2 0 0 0 1.4-1.4l1.6-6.1a.5.5 0 0 1 1 0l1.6 6.1a2 2 0 0 0 1.4 1.4l6.1 1.6a.5.5 0 0 1 0 1l-6.1 1.6a2 2 0 0 0-1.4 1.4l-1.6 6.1a.5.5 0 0 1-1 0z"/></symbol>
+      <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></symbol>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
       <symbol id="i-tooth" viewBox="0 0 24 24"><path d="M12 5.5C10.5 4 8.6 3.2 6.8 3.6 4.3 4.1 3 6.6 3.4 9.4c.3 2.2 1.3 3.6 1.8 5.6.5 2.2.6 5.6 2.4 6 1.6.3 2-2.6 2.6-4.4.4-1.2 1-1.7 1.8-1.7s1.4.5 1.8 1.7c.6 1.8 1 4.7 2.6 4.4 1.8-.4 1.9-3.8 2.4-6 .5-2 1.5-3.4 1.8-5.6.4-2.8-.9-5.3-3.4-5.8-1.8-.4-3.7.4-5.2 1.9z"/></symbol>
     </defs>
@@ -133,35 +136,64 @@
     <!-- 4.2 Hero -->
     <section class="hero" id="topo" aria-labelledby="hero-title">
       <div class="hero__card" data-hero-card>
+        <!-- fundo vivo: pontos que acendem perto do cursor + auroras -->
+        <div class="hero__bg" aria-hidden="true">
+          <div class="hero__dots"></div>
+          <div class="hero__dots hero__dots--lit"></div>
+          <span class="hero__blob hero__blob--a"></span>
+          <span class="hero__blob hero__blob--b"></span>
+        </div>
         <div class="hero__mist" aria-hidden="true"></div>
 
-        <div class="hero__copy">
-          <h1 class="hero__title" id="hero-title" data-split>
-            <span class="line"><span>Cuidar do seu</span></span>
-            <span class="line"><span>sorriso ficou</span></span>
-            <span class="line"><span>simples.</span></span>
+        <div class="hero__copy" data-depth="-6">
+          <a class="hero-pill" href="#" data-wa="Olá! Vi que a agenda está aberta. Quero marcar uma avaliação." data-hero-fade>
+            <span class="hero-pill__dot" aria-hidden="true"></span>
+            <span>Agenda aberta esta semana</span>
+            <span class="hero-pill__sep" aria-hidden="true"></span>
+            <span class="hero-pill__strong">Avaliação em 24h</span>
+            <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+          <h1 class="hero__title" id="hero-title" data-split aria-label="Cuidar do seu sorriso ficou simples.">
+            <span class="line" aria-hidden="true"><span>Cuidar do seu</span></span>
+            <span class="line" aria-hidden="true"><span>sorriso ficou</span></span>
+            <span class="line" aria-hidden="true"><span><span class="cycle" data-cycle="simples.|leve.|seguro.|preciso.">simples.</span></span></span>
           </h1>
           <p class="hero__sub" data-hero-fade>Tratamentos personalizados pensados no seu conforto, na sua confiança e na saúde do seu sorriso a longo prazo.</p>
-          <a class="btn btn--primary btn--shine hero__cta" href="#" data-wa data-hero-fade>
-            <span class="btn__pill">Agendar online</span>
-            <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-          </a>
+          <div class="hero__ctas" data-hero-fade>
+            <a class="btn btn--primary btn--shine hero__cta" href="#" data-wa data-magnetic>
+              <span class="btn__pill">Agendar online</span>
+              <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+            </a>
+            <a class="hero__link" href="#tratamentos">Ver tratamentos</a>
+          </div>
         </div>
 
         <!-- Palco do implante: SVG + anotações compartilham o mesmo sistema de coordenadas -->
-        <div class="stage" data-stage>
+        <div class="stage" data-stage data-depth="10">
           <div class="stage__tilt" data-tilt>
+            <svg class="orbits" viewBox="0 0 1024 572" aria-hidden="true">
+              <ellipse class="orbit" cx="512" cy="260" rx="300" ry="62"/>
+              <ellipse class="orbit orbit--2" cx="512" cy="300" rx="420" ry="92"/>
+            </svg>
             <img class="implant" src="assets/hero-implante.webp" alt="Implante dentário: coroa de cerâmica branca sobre pino de titânio, entre dentes naturais" width="1024" height="572" fetchpriority="high" decoding="async">
 
+            <div class="scan" aria-hidden="true"><span></span></div>
+            <div class="sats" aria-hidden="true">
+              <span class="sat" data-sat="0" data-ring="0"><svg><use href="#i-sparkle"/></svg></span>
+              <span class="sat" data-sat="1" data-ring="1"><svg><use href="#i-shield"/></svg></span>
+              <span class="sat" data-sat="2" data-ring="1"><svg><use href="#i-smile"/></svg></span>
+            </div>
             <!-- linhas de anotação (desenham-se no carregamento) -->
             <svg class="annot-lines" viewBox="0 0 1024 572" aria-hidden="true">
               <g class="annot-line" data-annot-line="0">
                 <path d="M602 132 L690 82 L862 82"/>
+                <circle class="pulse" cx="602" cy="132" r="4"/>
                 <circle cx="602" cy="132" r="4"/>
                 <circle cx="862" cy="82" r="4"/>
               </g>
               <g class="annot-line" data-annot-line="1">
                 <path d="M578 250 L690 330 L882 330"/>
+                <circle class="pulse" cx="578" cy="250" r="4"/>
                 <circle cx="578" cy="250" r="4"/>
                 <circle cx="882" cy="330" r="4"/>
               </g>
@@ -178,13 +210,27 @@
           </div>
         </div>
 
+        <!-- cartões de vidro flutuantes (profundidade com o mouse) -->
+        <div class="glass glass--a" data-depth="22" aria-hidden="true">
+          <div class="glass__in">
+            <span class="glass__ic"><svg><use href="#i-star"/></svg></span>
+            <span><strong>4,9 no Google</strong><small>750+ avaliações</small></span>
+          </div>
+        </div>
+        <div class="glass glass--b" data-depth="14" aria-hidden="true">
+          <div class="glass__in">
+            <span class="glass__ic glass__ic--ok"><svg><use href="#i-check"/></svg></span>
+            <span><strong>Anestesia sem dor</strong><small>Conforto em cada etapa</small></span>
+          </div>
+        </div>
+
         <!-- avatares + tooltip com nota -->
         <div class="trust" data-hero-fade tabindex="0" aria-describedby="trust-tip">
           <div class="avatars" aria-hidden="true">
             <span class="av"><b>A</b><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span><span class="av"><b>M</b><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span><span class="av"><b>R</b><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span>
           </div>
           <p>Pacientes que confiam<br>no nosso cuidado.</p>
-          <span class="trust__tip" role="tooltip" id="trust-tip"><svg><use href="#i-star"/></svg> [4.9] no Google</span>
+          <span class="trust__tip" role="tooltip" id="trust-tip"><svg><use href="#i-star"/></svg> 4,9 no Google</span>
         </div>
 
         <!-- chips que trocam as anotações -->

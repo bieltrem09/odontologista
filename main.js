@@ -220,6 +220,7 @@
   function ready() {
     html.classList.add('is-ready');
     heroTitle.classList.add('is-in');
+    setTimeout(() => { startCycle(); startHeroLoop(); }, 0);
     if (reduced()) {
       $$('.annot-line').forEach(l => l.classList.add('is-drawn'));
       $$('.annot').forEach(a => a.classList.add('is-in'));
@@ -874,6 +875,93 @@
   addEventListener('scroll', () => requestAnimationFrame(updateRead), { passive: true });
   addEventListener('resize', updateRead);
   updateRead();
+
+  /* =========================================================
+     Hero vivo — Text Cycle, órbitas, profundidade com o mouse,
+     pontos acesos e botão magnético
+     ========================================================= */
+  const heroEl = $('[data-hero-card]');
+  let heroVisible = true;
+  new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; if (heroVisible) startHeroLoop(); }).observe(heroEl);
+
+  // Text Cycle: troca a última palavra letra por letra (cor interpolada do azul ao lilás)
+  const cycleEl = $('[data-cycle]');
+  const CYCLE = cycleEl ? cycleEl.dataset.cycle.split('|') : [];
+  const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  const C1 = [74, 91, 214], C2 = [140, 108, 240], C3 = [140, 155, 245];
+  const charsFor = (word, cls) => [...word].map((ch, i, arr) => {
+    const t = arr.length > 1 ? i / (arr.length - 1) : 0;
+    const col = t < .6 ? mix(C1, C2, t / .6) : mix(C2, C3, (t - .6) / .4);
+    return `<span class="ch ${cls}" style="--i:${i};--c:rgb(${col})">${ch}</span>`;
+  }).join('');
+  let cycleI = 0, cycleTimer = null;
+  if (cycleEl) cycleEl.innerHTML = charsFor(CYCLE[0], '');
+  function nextWord() {
+    if (!cycleEl || document.hidden || !heroVisible) return;
+    const old = $$('.ch', cycleEl);
+    old.forEach(c => c.classList.add('out'));
+    setTimeout(() => {
+      cycleI = (cycleI + 1) % CYCLE.length;
+      cycleEl.innerHTML = charsFor(CYCLE[cycleI], 'in');
+    }, 380 + old.length * 22);
+  }
+  function startCycle() { if (cycleEl && !reduced() && !cycleTimer) cycleTimer = setInterval(nextWord, 3400); }
+
+  // Órbitas: satélites percorrem as elipses com falsa profundidade (frente maior, trás mais apagado)
+  const RINGS = [{ cx: 512, cy: 260, rx: 300, ry: 62, period: 16, dir: 1 }, { cx: 512, cy: 300, rx: 420, ry: 92, period: 24, dir: -1 }];
+  const tiltBox = $('[data-tilt]');
+  const sats = $$('[data-sat]').map((el, k) => ({ el, ring: RINGS[+el.dataset.ring], phase: [0.2, 0.15, 0.65][k] * Math.PI * 2 }));
+  let tiltW = 0, tiltH = 0;
+  const measureTilt = () => { tiltW = tiltBox.offsetWidth; tiltH = tiltBox.offsetHeight; };
+  measureTilt(); addEventListener('resize', measureTilt);
+
+  // Profundidade com o mouse + pontos acesos + botão magnético
+  const depthEls = $$('[data-depth]', heroEl).map(el => ({ el, d: +el.dataset.depth, x: 0, y: 0 }));
+  const dotsLit = $('.hero__dots--lit', heroEl);
+  const magnets = $$('[data-magnetic]', heroEl).map(el => ({ el, x: 0, y: 0, tx: 0, ty: 0 }));
+  let nx = 0, ny = 0;
+  if (finePointer) {
+    heroEl.addEventListener('pointermove', e => {
+      const r = heroEl.getBoundingClientRect();
+      nx = ((e.clientX - r.left) / r.width - .5) * 2;
+      ny = ((e.clientY - r.top) / r.height - .5) * 2;
+      dotsLit.style.setProperty('--cx', (e.clientX - r.left) + 'px');
+      dotsLit.style.setProperty('--cy', (e.clientY - r.top) + 'px');
+      magnets.forEach(m => {
+        const b = m.el.getBoundingClientRect();
+        const dx = e.clientX - (b.left + b.width / 2), dy = e.clientY - (b.top + b.height / 2);
+        const near = Math.hypot(dx, dy) < Math.max(b.width, b.height) * .9;
+        m.tx = near ? clamp(dx * .22, -12, 12) : 0;
+        m.ty = near ? clamp(dy * .35, -10, 10) : 0;
+      });
+      startHeroLoop();
+    });
+    heroEl.addEventListener('pointerleave', () => { nx = ny = 0; magnets.forEach(m => { m.tx = m.ty = 0; }); });
+  }
+
+  let heroRaf = null, heroT0 = performance.now();
+  function heroLoop(now) {
+    const t = (now - heroT0) / 1000;
+    // satélites
+    if (tiltW) sats.forEach(s => {
+      const R = s.ring, a = s.phase + s.ring.dir * (t / R.period) * Math.PI * 2;
+      const x = (R.cx + R.rx * Math.cos(a)) / 1024 * tiltW, y = (R.cy + R.ry * Math.sin(a)) / 572 * tiltH;
+      const front = (Math.sin(a) + 1) / 2;          // 0 = atrás, 1 = na frente
+      s.el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${(.72 + front * .38).toFixed(3)})`;
+      s.el.style.opacity = (.35 + front * .65).toFixed(3);
+      s.el.style.zIndex = front > .5 ? 2 : 0;
+    });
+    // profundidade suave (lerp)
+    depthEls.forEach(o => {
+      o.x += (nx * o.d - o.x) * .08; o.y += (ny * o.d * .6 - o.y) * .08;
+      o.el.style.setProperty('--px', o.x.toFixed(2) + 'px'); o.el.style.setProperty('--py', o.y.toFixed(2) + 'px');
+    });
+    magnets.forEach(m => { m.x += (m.tx - m.x) * .18; m.y += (m.ty - m.y) * .18; m.el.style.translate = `${m.x.toFixed(2)}px ${m.y.toFixed(2)}px`; });
+    heroRaf = heroVisible && !document.hidden ? requestAnimationFrame(heroLoop) : null;
+  }
+  function startHeroLoop() { if (!reduced() && !heroRaf && heroVisible) heroRaf = requestAnimationFrame(heroLoop); }
+  document.addEventListener('visibilitychange', startHeroLoop);
+  if (reduced()) sats.forEach(s => { s.el.style.display = 'none'; });
 
   // ---------- Go ----------
   update();
