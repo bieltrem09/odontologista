@@ -553,16 +553,37 @@
      ========================================================= */
   const ba = $('[data-ba]');
   const range = $('.ba__range', ba);
-  let baTween = null, baHinted = false;
-  const setPos = v => { ba.style.setProperty('--pos', v + '%'); range.value = v; };
+  let baTween = null, baHinted = false, pos = 50, dragId = null;
+  const setPos = v => {
+    pos = clamp(v, 0, 100);
+    ba.style.setProperty('--pos', pos + '%');
+    range.value = Math.round(pos);
+    range.setAttribute('aria-valuetext', `${Math.round(pos)}% depois`);
+    ba.classList.toggle('hide-l', pos < 14);
+    ba.classList.toggle('hide-r', pos > 86);
+  };
+  const posFromX = x => { const r = ba.getBoundingClientRect(); return ((x - r.left) / r.width) * 100; };
+  // teclado continua pelo input range (setas, Home/End)
   range.addEventListener('input', () => { baTween?.cancel(); setPos(+range.value); });
-  range.addEventListener('pointerdown', () => { baTween?.cancel(); ba.classList.add('is-active'); });
-  addEventListener('pointerup', () => ba.classList.remove('is-active'));
+  // arrastar começando em qualquer ponto da imagem — funciona igual no iPhone, Android e desktop
+  ba.addEventListener('pointerdown', e => {
+    if (e.button > 0) return;
+    baTween?.cancel();
+    dragId = e.pointerId;
+    ba.setPointerCapture(e.pointerId);
+    ba.classList.add('is-active');
+    setPos(posFromX(e.clientX));
+  });
+  ba.addEventListener('pointermove', e => { if (e.pointerId === dragId) setPos(posFromX(e.clientX)); });
+  const endDrag = e => { if (e.pointerId !== dragId) return; dragId = null; ba.classList.remove('is-active'); };
+  ba.addEventListener('pointerup', endDrag);
+  ba.addEventListener('pointercancel', endDrag);
+  ba.addEventListener('dragstart', e => e.preventDefault());
 
   function animatePos(to, dur = 700) {
     baTween?.cancel();
     if (reduced()) { setPos(to); return Promise.resolve(); }
-    const from = +range.value;
+    const from = pos;
     baTween = tween(dur, t => setPos(from + (to - from) * t), easeInOutCubic);
     return baTween;
   }
@@ -571,6 +592,7 @@
     const io = new IntersectionObserver(async ([en]) => {
       if (!en.isIntersecting || baHinted) return;
       baHinted = true; io.disconnect();
+      GALLERY.forEach(g => ['antes', 'depois'].forEach(s => { new Image().src = `assets/ba-${g.slug}-${s}.webp`; }));
       await wait(900);
       if (await animatePos(64, 900)) if (await animatePos(38, 1000)) animatePos(50, 800);
     }, { threshold: .5 });
@@ -612,66 +634,49 @@
   document.fonts?.ready.then(placeInk); placeInk();
 
   /* =========================================================
-     Depoimentos
+     Depoimentos — faixa contínua (adaptado do "Testimonials 13", 21st.dev)
      ========================================================= */
-  const tBox = $('[data-testi]');
-  const quotes = $$('.quote', tBox);
-  const bar = $('[data-t-bar]');
-  const live = $('[data-t-live]');
-  const tToggle = $('[data-t-toggle]');
-  const DUR = 7000;
-  let ti = 0, userPaused = reduced(), hoverPaused = false, timer = null, startedAt = 0, remaining = DUR;
-
-  function showQuote(n, announce) {
-    const prev = quotes[ti];
-    ti = (n + quotes.length) % quotes.length;
-    if (prev !== quotes[ti]) {
-      prev.classList.add('is-leaving');
-      prev.classList.remove('is-active');
-      prev.setAttribute('aria-hidden', 'true');
-      setTimeout(() => prev.classList.remove('is-leaving'), 800);
-      quotes[ti].classList.add('is-active');
-      quotes[ti].removeAttribute('aria-hidden');
-    }
-    if (announce) live.textContent = `Depoimento ${ti + 1} de ${quotes.length}`;
-    restartTimer();
+  const face = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&crop=faces&w=160&h=160&q=70`;
+  const TESTIMONIALS = [
+    { name: 'Ana Souza', treat: 'Lentes de contato dental', img: 'photo-1494790108377-be9c29b29330',
+      text: 'Eu tinha vergonha de sorrir em foto. A Dra. Helena planejou tudo comigo e o resultado ficou natural, do jeitinho que eu queria.' },
+    { name: 'Rafael Lima', treat: 'Implante', img: 'photo-1507003211169-0a1dd7228f2d',
+      text: 'Tinha pavor de implante e saí tranquilo. Explicaram cada etapa antes de começar e não senti dor nenhuma.' },
+    { name: 'Juliana Costa', treat: 'Clareamento', img: 'photo-1438761681033-6461ffad8d80',
+      text: 'Clareamento sem sensibilidade e com acompanhamento de perto. Atendimento pontual e muito carinhoso.' },
+    { name: 'Marcos Oliveira', treat: 'Tratamento de canal', img: 'photo-1500648767791-00dcc994a43e',
+      text: 'Cheguei com dor e fui atendido no mesmo dia. Canal feito com calma, sem aquele medo que eu tinha.' },
+    { name: 'Patrícia Fernandes', treat: 'Odontopediatria', img: 'photo-1544005313-94ddf0286df2',
+      text: 'Meu filho saiu da consulta pedindo para voltar. A Dra. Camila tem uma paciência incrível com criança.' },
+    { name: 'Bruno Carvalho', treat: 'Alinhadores', img: 'photo-1506794778202-cad84cf45f1d',
+      text: 'Os alinhadores mudaram meu sorriso sem ninguém perceber que eu estava usando. Recomendo de olhos fechados.' },
+  ];
+  const stars = '<svg><use href="#i-star"/></svg>'.repeat(5);
+  const initials = n => n.split(' ').map(w => w[0]).slice(0, 2).join('');
+  const tmItem = (t, i) => `
+    <li class="tm-col">
+      <figure class="tm-card">
+        <figcaption class="tm-who">
+          <span class="av av--lg"><b>${initials(t.name)}</b><img src="${face(t.img)}" alt="" width="48" height="48" loading="lazy" decoding="async"></span>
+          <span><strong>${t.name}</strong><small>${t.treat}</small></span>
+          <span class="tm-stars" aria-label="Nota 5 de 5">${stars}</span>
+        </figcaption>
+        <blockquote>“${t.text}”</blockquote>
+      </figure>
+      <div class="tm-tile" aria-hidden="true"><svg><use href="#i-tooth"/></svg><span>${t.treat}</span></div>
+    </li>`;
+  const tmTrack = $('[data-tm-track]');
+  if (tmTrack) {
+    const list = TESTIMONIALS.map(tmItem).join('');
+    tmTrack.innerHTML = `<ul class="tm-list">${list}</ul><ul class="tm-list" aria-hidden="true">${list}</ul>`;
+    const tm = $('[data-tm]');
+    const tmToggle = $('[data-tm-toggle]');
+    tmToggle?.addEventListener('click', () => {
+      const paused = tm.classList.toggle('is-paused');
+      tmToggle.setAttribute('aria-label', paused ? 'Retomar depoimentos' : 'Pausar depoimentos');
+      $('use', tmToggle).setAttribute('href', paused ? '#i-play' : '#i-pause');
+    });
   }
-  function restartTimer() {
-    clearTimeout(timer);
-    remaining = DUR;
-    bar.classList.remove('is-run'); void bar.offsetWidth;
-    if (!userPaused) { bar.style.setProperty('--dur', DUR + 'ms'); bar.classList.add('is-run'); }
-    schedule();
-  }
-  function schedule() {
-    clearTimeout(timer);
-    const paused = userPaused || hoverPaused;
-    tBox.classList.toggle('is-paused', paused);
-    if (paused) return;
-    startedAt = performance.now();
-    timer = setTimeout(() => showQuote(ti + 1), remaining);
-  }
-  function pauseHover(v) {
-    if (v === hoverPaused) return;
-    if (v && timer) remaining -= performance.now() - startedAt;
-    hoverPaused = v;
-    schedule();
-  }
-  $('[data-t-prev]').addEventListener('click', () => showQuote(ti - 1, true));
-  $('[data-t-next]').addEventListener('click', () => showQuote(ti + 1, true));
-  tToggle.addEventListener('click', () => {
-    userPaused = !userPaused;
-    tToggle.setAttribute('aria-label', userPaused ? 'Retomar rotação' : 'Pausar rotação');
-    $('use', tToggle).setAttribute('href', userPaused ? '#i-play' : '#i-pause');
-    restartTimer();
-  });
-  if (userPaused) { tToggle.setAttribute('aria-label', 'Retomar rotação'); $('use', tToggle).setAttribute('href', '#i-play'); }
-  tBox.addEventListener('mouseenter', () => pauseHover(true));
-  tBox.addEventListener('mouseleave', () => pauseHover(false));
-  tBox.addEventListener('focusin', () => pauseHover(true));
-  tBox.addEventListener('focusout', e => { if (!tBox.contains(e.relatedTarget)) pauseHover(false); });
-  // só roda quando está visível
-  new IntersectionObserver(([en]) => { en.isIntersecting ? restartTimer() : clearTimeout(timer); }).observe(tBox);
 
   /* =========================================================
      FAQ (acordeão)

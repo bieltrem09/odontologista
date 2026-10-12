@@ -166,7 +166,7 @@
         <!-- avatares + tooltip com nota -->
         <div class="trust" data-hero-fade tabindex="0" aria-describedby="trust-tip">
           <div class="avatars" aria-hidden="true">
-            <span style="--h:228">A</span><span style="--h:200">M</span><span style="--h:255">R</span>
+            <span class="av"><b>A</b><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span><span class="av"><b>M</b><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span><span class="av"><b>R</b><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span>
           </div>
           <p>Pacientes que confiam<br>no nosso cuidado.</p>
           <span class="trust__tip" role="tooltip" id="trust-tip"><svg><use href="#i-star"/></svg> [4.9] no Google</span>
@@ -235,9 +235,9 @@
           <aside class="services__aside" data-reveal>
             <div class="reviews">
               <div class="avatars" aria-hidden="true">
-                <span style="--h:228">J</span><span style="--h:210">L</span><span style="--h:245">C</span>
+                <span class="av"><b>A</b><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span><span class="av"><b>R</b><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span><span class="av"><b>J</b><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span>
               </div>
-              <div><strong class="reviews__n">[750+]</strong><span>avaliações</span></div>
+              <div><strong class="reviews__n">750+</strong><span>avaliações</span></div>
             </div>
             <p>Veja o que nossos pacientes dizem sobre a experiência.</p>
             <div class="carousel-ctrl">
@@ -445,17 +445,17 @@
           <span class="ba__tag ba__tag--l">Antes</span>
           <span class="ba__tag ba__tag--r">Depois</span>
           <div class="ba__handle" aria-hidden="true"><span><svg><use href="#i-move"/></svg></span></div>
-          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois">
+          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois — use as setas">
         </div>
         <p class="ba__cap" data-ba-cap>Lentes de contato dental · 3 consultas</p>
         <p class="note">Publicar somente com autorização escrita do paciente e seguindo as normas de publicidade do CFO.</p>
       </div>
     </section>
 
-    <!-- 4.9 Depoimentos -->
+    <!-- 4.9 Depoimentos — adaptado do "Testimonials 13" (21st.dev) -->
     <section class="section testi" aria-labelledby="t-testi">
-      <div class="wrap testi__grid">
-        <div>
+      <div class="wrap">
+        <div class="shead">
           <h2 class="stitle" id="t-testi">
             <span class="slabel" data-reveal>Depoimentos /</span>
             <span data-split>
@@ -463,38 +463,17 @@
               <span class="line"><span>nossos pacientes</span></span>
             </span>
           </h2>
-          <a class="gbadge" href="[LINK DO GOOGLE]" data-reveal style="--d:3">
-            <span class="gbadge__stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
-            Nota [4.9] em [N] avaliações no Google
-          </a>
-        </div>
-        <div class="testi__box" data-testi data-reveal style="--d:2" aria-roledescription="carrossel" role="region" aria-label="Depoimentos">
-          <div class="testi__stage">
-            <figure class="quote is-active" aria-roledescription="slide" aria-label="Depoimento 1 de 4">
-              <blockquote>“[Depoimento real do Google — até 3 linhas. Ex.: tinha pavor de dentista e saí tranquila, explicaram tudo antes.]”</blockquote>
-              <figcaption><span class="ini">AS</span><span><b>[Nome do paciente]</b><small>[Tratamento feito]</small></span></figcaption>
-            </figure>
-            <figure class="quote" aria-roledescription="slide" aria-label="Depoimento 2 de 4" aria-hidden="true">
-              <blockquote>“[Depoimento real do Google — sobre o atendimento e o ambiente da clínica.]”</blockquote>
-              <figcaption><span class="ini">RM</span><span><b>[Nome do paciente]</b><small>[Tratamento feito]</small></span></figcaption>
-            </figure>
-            <figure class="quote" aria-roledescription="slide" aria-label="Depoimento 3 de 4" aria-hidden="true">
-              <blockquote>“[Depoimento real do Google — sobre o resultado e o acompanhamento.]”</blockquote>
-              <figcaption><span class="ini">LC</span><span><b>[Nome do paciente]</b><small>[Tratamento feito]</small></span></figcaption>
-            </figure>
-            <figure class="quote" aria-roledescription="slide" aria-label="Depoimento 4 de 4" aria-hidden="true">
-              <blockquote>“[Depoimento real do Google — sobre o atendimento infantil ou familiar.]”</blockquote>
-              <figcaption><span class="ini">PF</span><span><b>[Nome do paciente]</b><small>[Tratamento feito]</small></span></figcaption>
-            </figure>
-          </div>
-          <div class="testi__ctrl">
-            <button class="ctrl ctrl--solid" type="button" data-t-prev aria-label="Depoimento anterior"><svg><use href="#i-left"/></svg></button>
-            <button class="ctrl" type="button" data-t-next aria-label="Próximo depoimento"><svg><use href="#i-right"/></svg></button>
-            <button class="ctrl" type="button" data-t-toggle aria-label="Pausar rotação"><svg><use href="#i-pause"/></svg></button>
-            <span class="testi__bar" aria-hidden="true"><span data-t-bar></span></span>
-            <span class="sr-only" aria-live="polite" data-t-live></span>
+          <div class="testi__side" data-reveal style="--d:3">
+            <a class="gbadge" href="#">
+              <span class="gbadge__stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+              Nota 4,9 em 750+ avaliações no Google
+            </a>
+            <button class="ctrl" type="button" data-tm-toggle aria-label="Pausar depoimentos"><svg><use href="#i-pause"/></svg></button>
           </div>
         </div>
+      </div>
+      <div class="tm" data-tm data-reveal role="region" aria-label="Depoimentos de pacientes">
+        <div class="tm__track" data-tm-track></div>
       </div>
     </section>
 
