@@ -13,11 +13,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=dev">
   <script>
     // Marca JS cedo para os estados iniciais das animações (sem "flash" de conteúdo)
     document.documentElement.classList.add('js');
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduced');
+    // Rede de segurança: se o script principal falhar ou demorar, a apresentação sai e o conteúdo aparece
+    (function () {
+      var done = false;
+      function rescue() {
+        if (done || document.documentElement.classList.contains('is-ready')) return;
+        done = true;
+        document.documentElement.classList.add('is-ready');
+        var intro = document.querySelector('.intro'); if (intro) intro.remove();
+        document.querySelectorAll('[data-reveal],[data-split],[data-draw],[data-carousel],.annot,.annot-line').forEach(function (el) {
+          el.classList.add('is-in', 'is-drawn');
+        });
+      }
+      addEventListener('error', function (e) { if (!e.filename || /main\.js/.test(e.filename)) setTimeout(rescue, 300); });
+      setTimeout(rescue, 5000);
+    })();
   </script>
   <script type="application/ld+json">
   {
@@ -643,6 +658,6 @@
     </div>
   </dialog>
 
-  <script src="main.js" defer></script>
+  <script src="main.js?v=dev" defer></script>
 </body>
 </html>
