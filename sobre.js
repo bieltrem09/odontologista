@@ -143,6 +143,59 @@
     });
   }
 
+  // ---------- Bento dinâmico ----------
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const onScreen = (el, cb) => new IntersectionObserver(([en]) => cb(en.isIntersecting), { threshold: .3 }).observe(el);
+
+  // conversa de WhatsApp se digitando (em loop enquanto visível)
+  const chat = $('[data-chat]');
+  if (chat) {
+    const msgs = $$('.msg', chat), typing = $('.typing', chat);
+    let visible = false, running = false;
+    const run = async () => {
+      if (running) return; running = true;
+      while (visible) {
+        msgs.forEach(m => m.classList.remove('is-on'));
+        for (const m of msgs) {
+          if (!visible) break;
+          if (m.classList.contains('msg--out')) {          // "digitando…" antes da resposta da clínica
+            typing.classList.add('is-on'); await wait(1100); typing.classList.remove('is-on');
+          } else await wait(600);
+          m.classList.add('is-on');
+          await wait(900);
+        }
+        await wait(2600);
+      }
+      running = false;
+    };
+    if (reduced()) msgs.forEach(m => m.classList.add('is-on'));
+    else onScreen(chat, v => { visible = v; if (v) run(); });
+  }
+
+  // ticker de inovações
+  const ticker = $('[data-ticker]');
+  if (ticker && !reduced()) {
+    const list = $('.ticker__list', ticker), items = list.children.length;
+    let i = 0, timer = null;
+    onScreen(ticker, v => {
+      clearInterval(timer);
+      if (v) timer = setInterval(() => { i = (i + 1) % items; list.style.transform = `translateY(${-i * 1.25}em)`; }, 1900);
+    });
+  }
+
+  // inclinação 3D suave nos cards
+  if (finePointer && !reduced()) {
+    $$('[data-tilt3d]').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+        el.style.setProperty('--ry', (px * 7).toFixed(2) + 'deg');
+        el.style.setProperty('--rx', (-py * 7).toFixed(2) + 'deg');
+      });
+      el.addEventListener('pointerleave', () => { el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
+    });
+  }
+
   // ---------- Indicador do menu ----------
   const nav = $('.nav'), ind = $('.nav__indicator');
   const navLinks = $$('.nav a');

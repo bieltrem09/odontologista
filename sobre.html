@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sobre nós — OdontoClinic | Limeira/SP desde 1997</title>
   <meta name="description" content="Conheça a OdontoClinic: odontologia em Limeira/SP desde 1997, com atendimento acolhedor, especialistas em todas as áreas e condições acessíveis.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <meta name="theme-color" content="#F7F8FC">
   <meta property="og:title" content="Sobre a OdontoClinic — nascemos pra inovar">
   <meta property="og:image" content="https://bieltrem09.github.io/odontologista/assets/og-hero.jpg">
@@ -57,7 +58,7 @@
   <header class="header" data-header>
     <div class="header__inner">
       <a href="index.html" class="logo" aria-label="OdontoClinic — início" data-page>
-        <span class="logo__mark"><svg><use href="#i-tooth"/></svg></span>
+        <span class="logo__mark"><img src="assets/logo.svg" alt="" width="40" height="40"></span>
         <span class="logo__name">OdontoClinic</span>
       </a>
       <nav class="nav" aria-label="Principal">
@@ -208,25 +209,55 @@
           </h2>
         </div>
         <div class="bento" data-stagger>
-          <article class="bcard bcard--wide" data-reveal>
-            <span class="bcard__ring" aria-hidden="true"></span>
-            <span class="bcard__ic" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>
-            <h3>Atendimento único</h3>
-            <p>Seja por telefone ou no consultório, cuidamos de você de um jeito único. Tudo pra garantir a excelência do seu atendimento.</p>
+          <article class="bcard bcard--wide bcard--chat" data-reveal data-tilt3d>
+            <div class="bcard__text">
+              <span class="bcard__ic" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>
+              <h3>Atendimento único</h3>
+              <p>Seja por telefone ou no consultório, cuidamos de você de um jeito único. Tudo pra garantir a excelência do seu atendimento.</p>
+            </div>
+            <div class="chat" data-chat aria-hidden="true">
+              <div class="chat__head"><img src="assets/logo.svg" alt="" width="28" height="28"><span><b>OdontoClinic</b><small>online agora</small></span></div>
+              <div class="chat__body">
+                <div class="msg msg--in">Oi! Queria agendar uma avaliação.</div>
+                <div class="msg msg--out">Claro! Temos horário amanhã às 9h. Pode ser?</div>
+                <div class="msg msg--in">Perfeito, obrigada!</div>
+                <div class="msg msg--out">Agendado! Até amanhã <svg><use href="#i-check"/></svg></div>
+                <div class="typing"><i></i><i></i><i></i></div>
+              </div>
+            </div>
           </article>
-          <article class="bcard bcard--brand" data-reveal>
+
+          <article class="bcard bcard--brand bcard--smile" data-reveal data-tilt3d>
+            <svg class="smile" viewBox="0 0 200 120" aria-hidden="true">
+              <path class="smile__arc" d="M30 40 Q100 120 170 40"/>
+              <path class="smile__spark s1" d="M40 14l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
+              <path class="smile__spark s2" d="M162 8l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+              <path class="smile__spark s3" d="M178 78l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>
+            </svg>
             <span class="bcard__ic" aria-hidden="true"><svg><use href="#i-smile"/></svg></span>
             <h3>Sorrisos que transformam</h3>
             <p>Acreditamos que um sorriso saudável eleva a autoestima e transforma a vida das pessoas. Isso é o que nos inspira a buscar, todos os dias, as melhores soluções.</p>
           </article>
-          <article class="bcard" data-reveal>
+
+          <article class="bcard bcard--innov" data-reveal data-tilt3d>
             <span class="bcard__ic" aria-hidden="true"><svg><use href="#i-sparkle"/></svg></span>
+            <div class="ticker" data-ticker aria-hidden="true">
+              <span class="ticker__label">Inovação em</span>
+              <span class="ticker__win"><span class="ticker__list">
+                <span>Planejamento digital</span><span>Escaneamento 3D</span><span>Alinhadores invisíveis</span><span>Lentes em porcelana</span><span>Implantes guiados</span>
+              </span></span>
+            </div>
             <h3>Inquietos e inovadores</h3>
             <p>Somos inquietos e inovadores. Levamos o melhor da odontologia, sempre com condições acessíveis a todos.</p>
           </article>
-          <article class="bcard bcard--wide bcard--img" data-reveal>
-            <img src="assets/t-ambiente.webp" alt="" width="1024" height="572" loading="lazy" decoding="async">
-            <span class="bcard__ic" aria-hidden="true"><svg><use href="#i-pin"/></svg></span>
+
+          <article class="bcard bcard--wide bcard--img" data-reveal data-tilt3d>
+            <img class="kenburns" src="assets/t-ambiente.webp" alt="" width="1024" height="572" loading="lazy">
+            <div class="bcard__pills" aria-hidden="true">
+              <span class="pill-live"><i></i>Limeira/SP</span>
+              <span>Especialistas em todas as áreas</span>
+              <span>Das crianças aos idosos</span>
+            </div>
             <h3>Multiclínicas modernas</h3>
             <p>Fazemos tudo pra você conquistar o sorriso que sempre sonhou. Por isso, além de modernas e bem localizadas, nossas multiclínicas contam com especialistas altamente qualificados pra cuidar de você.</p>
           </article>
@@ -249,7 +280,12 @@
     <section class="ab-cta" aria-labelledby="t-abcta">
       <div class="wrap">
         <div class="ab-cta__card" data-reveal="card">
-          <div class="aurora" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <div class="ab-cta__fx" aria-hidden="true">
+            <span class="ab-cta__beam ab-cta__beam--a"></span>
+            <span class="ab-cta__beam ab-cta__beam--b"></span>
+            <span class="ab-cta__grid"></span>
+            <img class="ab-cta__logo" src="assets/logo.svg" alt="" width="64" height="64">
+          </div>
           <h2 id="t-abcta" data-split>
             <span class="line"><span>Vamos cuidar do</span></span>
             <span class="line"><span>seu sorriso?</span></span>
