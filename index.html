@@ -454,13 +454,22 @@
           </div>
         </div>
 
-        <div class="ba" data-ba data-reveal="img" style="--pos:50%">
-          <div class="ba__layer ba__before"><img class="ba__img" data-ba-img-before alt="" src="assets/ba-lentes-antes.webp"><div class="ba__ph"><svg><use href="#i-image"/></svg><span data-ba-before>Antes</span></div></div>
-          <div class="ba__layer ba__after"><img class="ba__img" data-ba-img-after alt="" src="assets/ba-lentes-depois.webp"><div class="ba__ph"><svg><use href="#i-image"/></svg><span data-ba-after>Depois</span></div></div>
+        <div class="ba" data-ba data-reveal="img">
+          <div class="ba__base">
+            <div class="ba__ph"><svg><use href="#i-image"/></svg><span>Antes</span></div>
+            <img class="ba__img" data-ba-img-before src="assets/ba-lentes-antes.webp" alt="Antes do tratamento" width="1024" height="572" draggable="false">
+          </div>
+          <div class="ba__reveal" data-ba-reveal>
+            <div class="ba__reveal-in" data-ba-reveal-in>
+              <div class="ba__ph"><svg><use href="#i-image"/></svg><span>Depois</span></div>
+              <img class="ba__img" data-ba-img-after src="assets/ba-lentes-depois.webp" alt="Depois do tratamento" width="1024" height="572" draggable="false">
+            </div>
+          </div>
           <span class="ba__tag ba__tag--l">Antes</span>
           <span class="ba__tag ba__tag--r">Depois</span>
-          <div class="ba__handle" aria-hidden="true"><span><svg><use href="#i-move"/></svg></span></div>
-          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois — use as setas">
+          <div class="ba__handle" data-ba-handle aria-hidden="true"><span><svg><use href="#i-move"/></svg></span></div>
+          <span class="ba__hint" aria-hidden="true">Arraste para comparar</span>
+          <input class="ba__range" type="range" min="0" max="100" step="1" value="50" aria-label="Comparar antes e depois. Use as setas para mover o divisor.">
         </div>
         <p class="ba__cap" data-ba-cap>Lentes de contato dental · 3 consultas</p>
         <p class="note">Publicar somente com autorização escrita do paciente e seguindo as normas de publicidade do CFO.</p>

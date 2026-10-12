@@ -553,47 +553,74 @@
      ========================================================= */
   const ba = $('[data-ba]');
   const range = $('.ba__range', ba);
-  let baTween = null, baHinted = false, pos = 50, dragId = null;
-  const setPos = v => {
+  const baReveal = $('[data-ba-reveal]', ba);
+  const baRevealIn = $('[data-ba-reveal-in]', ba);
+  const baHandle = $('[data-ba-handle]', ba);
+  let baTween = null, baHinted = false, pos = 50, dragging = false, baW = 0;
+
+  // aplica a posição direto nos elementos (sem variável CSS)
+  function setPos(v) {
     pos = clamp(v, 0, 100);
-    ba.style.setProperty('--pos', pos + '%');
+    baReveal.style.transform = `translate3d(${pos}%, 0, 0)`;
+    baRevealIn.style.transform = `translate3d(${-pos}%, 0, 0)`;
+    baHandle.style.transform = `translate3d(${(pos / 100) * (baW || ba.offsetWidth)}px, 0, 0)`;
     range.value = Math.round(pos);
-    range.setAttribute('aria-valuetext', `${Math.round(pos)}% depois`);
+    range.setAttribute('aria-valuetext', `${Math.round(pos)}%`);
     ba.classList.toggle('hide-l', pos < 14);
     ba.classList.toggle('hide-r', pos > 86);
-  };
+  }
+  const measure = () => { baW = ba.offsetWidth; setPos(pos); };
+  addEventListener('resize', measure);
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(ba);
   const posFromX = x => { const r = ba.getBoundingClientRect(); return ((x - r.left) / r.width) * 100; };
-  // teclado continua pelo input range (setas, Home/End)
-  range.addEventListener('input', () => { baTween?.cancel(); setPos(+range.value); });
-  // arrastar começando em qualquer ponto da imagem — funciona igual no iPhone, Android e desktop
-  ba.addEventListener('pointerdown', e => {
-    if (e.button > 0) return;
-    baTween?.cancel();
-    dragId = e.pointerId;
-    ba.setPointerCapture(e.pointerId);
-    ba.classList.add('is-active');
-    setPos(posFromX(e.clientX));
-  });
-  ba.addEventListener('pointermove', e => { if (e.pointerId === dragId) setPos(posFromX(e.clientX)); });
-  const endDrag = e => { if (e.pointerId !== dragId) return; dragId = null; ba.classList.remove('is-active'); };
-  ba.addEventListener('pointerup', endDrag);
-  ba.addEventListener('pointercancel', endDrag);
+  const startDrag = x => { baTween?.cancel(); dragging = true; baW = ba.offsetWidth; ba.classList.add('is-active', 'was-used'); setPos(posFromX(x)); };
+  const moveDrag = x => { if (dragging) setPos(posFromX(x)); };
+  const endDrag = () => { dragging = false; ba.classList.remove('is-active'); };
+
+  if (window.PointerEvent) {
+    let pid = null;
+    ba.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      pid = e.pointerId;
+      try { ba.setPointerCapture(pid); } catch (_) {}
+      startDrag(e.clientX);
+    });
+    ba.addEventListener('pointermove', e => { if (e.pointerId === pid) moveDrag(e.clientX); });
+    const up = e => { if (e.pointerId === pid) { pid = null; endDrag(); } };
+    ba.addEventListener('pointerup', up);
+    ba.addEventListener('pointercancel', up);
+    ba.addEventListener('lostpointercapture', up);
+  } else {
+    // iPhones antigos (sem Pointer Events)
+    ba.addEventListener('touchstart', e => startDrag(e.touches[0].clientX), { passive: true });
+    ba.addEventListener('touchmove', e => moveDrag(e.touches[0].clientX), { passive: true });
+    ba.addEventListener('touchend', endDrag);
+    ba.addEventListener('mousedown', e => { startDrag(e.clientX); const mm = ev => moveDrag(ev.clientX); const mu = () => { endDrag(); removeEventListener('mousemove', mm); removeEventListener('mouseup', mu); }; addEventListener('mousemove', mm); addEventListener('mouseup', mu); });
+  }
   ba.addEventListener('dragstart', e => e.preventDefault());
+  // teclado: o input range (invisível) recebe o foco
+  range.addEventListener('input', () => { baTween?.cancel(); ba.classList.add('was-used'); setPos(+range.value); });
+  range.addEventListener('focus', () => ba.classList.add('is-focus'));
+  range.addEventListener('blur', () => ba.classList.remove('is-focus'));
+  ba.addEventListener('click', () => { if (!matchMedia('(pointer: coarse)').matches) range.focus({ preventScroll: true }); });
+  measure();
 
   function animatePos(to, dur = 700) {
     baTween?.cancel();
-    if (reduced()) { setPos(to); return Promise.resolve(); }
+    if (reduced()) { setPos(to); return Promise.resolve(true); }
     const from = pos;
     baTween = tween(dur, t => setPos(from + (to - from) * t), easeInOutCubic);
     return baTween;
   }
-  // dica de interação: o divisor "respira" uma vez ao aparecer
-  if ('IntersectionObserver' in window && !reduced()) {
+  // dica de interação: o divisor "respira" uma vez ao aparecer + pré-carrega as fotos das abas
+  if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(async ([en]) => {
       if (!en.isIntersecting || baHinted) return;
       baHinted = true; io.disconnect();
       GALLERY.forEach(g => ['antes', 'depois'].forEach(s => { new Image().src = `assets/ba-${g.slug}-${s}.webp`; }));
+      if (reduced()) return;
       await wait(900);
+      if (dragging || ba.classList.contains('was-used')) return;
       if (await animatePos(64, 900)) if (await animatePos(38, 1000)) animatePos(50, 800);
     }, { threshold: .5 });
     io.observe(ba);
@@ -610,14 +637,13 @@
     const g = GALLERY[i];
     ba.classList.add('is-swapping'); cap.classList.add('is-swapping');
     setTimeout(() => {
-      $('[data-ba-before]').textContent = `Foto “antes” — caso de ${g.tab.toLowerCase()}`;
-      $('[data-ba-after]').textContent = `Foto “depois” — caso de ${g.tab.toLowerCase()}`;
       cap.textContent = g.cap;
-      for (const side of ['antes', 'depois']) {
-        const img = $(side === 'antes' ? '[data-ba-img-before]' : '[data-ba-img-after]');
-        img.classList.remove('is-broken');
-        img.src = `assets/ba-${g.slug}-${side}.webp`;
-      }
+      const before = $('[data-ba-img-before]'), after = $('[data-ba-img-after]');
+      [before, after].forEach(img => img.classList.remove('is-broken'));
+      before.src = `assets/ba-${g.slug}-antes.webp`;
+      after.src = `assets/ba-${g.slug}-depois.webp`;
+      before.alt = `Antes — ${g.tab.toLowerCase()}`;
+      after.alt = `Depois — ${g.tab.toLowerCase()}`;
       ba.classList.remove('is-swapping'); cap.classList.remove('is-swapping');
     }, reduced() ? 0 : 320);
     animatePos(50, 600);
