@@ -1,5 +1,5 @@
 /* =========================================================
-   OdontoClinic — página "Sobre nós"
+   OdontoClinic — páginas internas (Sobre nós e Trabalhe conosco)
    Stacking Cards, Bento Grid, Reading Text Reveal (ideias do 21st.dev)
    ========================================================= */
 (() => {
@@ -193,6 +193,50 @@
         el.style.setProperty('--rx', (-py * 7).toFixed(2) + 'deg');
       });
       el.addEventListener('pointerleave', () => { el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
+    });
+  }
+
+  // ---------- Formulário de candidatura (Trabalhe conosco) ----------
+  const cform = $('[data-career-form]');
+  if (cform) {
+    const tel = cform.elements.tel;
+    tel.addEventListener('input', () => {
+      const d = tel.value.replace(/\D/g, '').slice(0, 11);
+      tel.value = d.length > 7 ? `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}` : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
+    });
+    const rules = {
+      nome: v => v.trim().length >= 3 || 'Informe seu nome completo.',
+      tel: v => v.replace(/\D/g, '').length >= 10 || 'Informe um WhatsApp com DDD.',
+      area: v => !!v || 'Escolha uma área.',
+    };
+    let tried = false;
+    const validate = () => {
+      let first = null;
+      Object.entries(rules).forEach(([name, rule]) => {
+        const el = cform.elements[name], r = rule(el.value), bad = r !== true, field = el.closest('.cfield');
+        field.classList.toggle('has-error', bad);
+        el.setAttribute('aria-invalid', bad);
+        $('.cfield__err', field).textContent = bad ? r : '';
+        if (bad && !first) first = el;
+      });
+      const lg = cform.elements.lgpd;
+      $('[data-lgpd-err]', cform).textContent = lg.checked ? '' : 'É preciso autorizar o uso dos dados.';
+      if (!lg.checked && !first) first = lg;
+      return first;
+    };
+    cform.addEventListener('input', () => { if (tried) validate(); });
+    cform.addEventListener('submit', e => {
+      e.preventDefault(); tried = true;
+      const bad = validate(), note = $('.cform__note', cform);
+      if (bad) {
+        bad.focus();
+        if (!reduced()) { cform.classList.remove('is-shake'); void cform.offsetWidth; cform.classList.add('is-shake'); }
+        return;
+      }
+      const f = cform.elements;
+      const msg = `Olá! Quero trabalhar na OdontoClinic.\nNome: ${f.nome.value.trim()}\nWhatsApp: ${f.tel.value}\nÁrea: ${f.area.value}` + (f.msg.value.trim() ? `\nSobre mim: ${f.msg.value.trim()}` : '');
+      note.textContent = 'Candidatura pronta! Abrindo o WhatsApp — envie seu currículo em PDF na mesma conversa.';
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
     });
   }
 
