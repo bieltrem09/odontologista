@@ -219,7 +219,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
 
 .hero__copy {
   position: relative; z-index: 3;
-  padding: calc(88px + clamp(20px, 4.5vh, 64px)) var(--gutter) 0;
+  padding: calc(88px + clamp(40px, 7vh, 96px)) var(--gutter) 0;
   max-width: 720px;
   transform: translateY(calc(var(--hp) * 80px));
   opacity: calc(1 - var(--hp) * 1.4);
