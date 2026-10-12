@@ -206,7 +206,7 @@
     try { seen = sessionStorage.getItem('intro-seen') === '1'; sessionStorage.setItem('intro-seen', '1'); } catch (_) {}
 
     if (reduced()) { intro?.remove(); ready(); return; }
-    if (seen) { intro?.classList.add('is-skipped'); await wait(40); ready(); return; }
+    if (seen || html.classList.contains('pt-enter')) { intro?.classList.add('is-skipped'); await wait(40); ready(); return; }
 
     // espera as fontes (com teto) e um tempo mínimo para o traço do dente
     await Promise.race([document.fonts?.ready ?? Promise.resolve(), wait(900)]);
@@ -788,7 +788,7 @@
     f.title = 'Mapa com a localização da clínica';
     f.loading = 'lazy';
     f.referrerPolicy = 'no-referrer-when-downgrade';
-    f.src = 'https://www.google.com/maps?q=' + encodeURIComponent('[ENDEREÇO COMPLETO DA CLÍNICA]') + '&output=embed';
+    f.src = 'https://www.google.com/maps?q=' + encodeURIComponent('Limeira, SP') + '&output=embed';
     f.addEventListener('load', () => { f.classList.add('is-loaded'); $('[data-map-load]', map)?.remove(); });
     map.appendChild(f);
   }
@@ -908,7 +908,7 @@
   function startCycle() { if (cycleEl && !reduced() && !cycleTimer) cycleTimer = setInterval(nextWord, 3400); }
 
   // Órbitas: satélites percorrem as elipses com falsa profundidade (frente maior, trás mais apagado)
-  const RINGS = [{ cx: 512, cy: 260, rx: 300, ry: 62, period: 16, dir: 1 }, { cx: 512, cy: 300, rx: 420, ry: 92, period: 24, dir: -1 }];
+  const RINGS = [{ cx: 512, cy: 260, rx: 300, ry: 62, period: 16, dir: 1 }, { cx: 512, cy: 300, rx: 380, ry: 86, period: 24, dir: -1 }];
   const tiltBox = $('[data-tilt]');
   const sats = $$('[data-sat]').map((el, k) => ({ el, ring: RINGS[+el.dataset.ring], phase: [0.2, 0.15, 0.65][k] * Math.PI * 2 }));
   let tiltW = 0, tiltH = 0;
@@ -948,7 +948,8 @@
       const x = (R.cx + R.rx * Math.cos(a)) / 1024 * tiltW, y = (R.cy + R.ry * Math.sin(a)) / 572 * tiltH;
       const front = (Math.sin(a) + 1) / 2;          // 0 = atrás, 1 = na frente
       s.el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${(.72 + front * .38).toFixed(3)})`;
-      s.el.style.opacity = (.35 + front * .65).toFixed(3);
+      const edge = clamp((x / tiltW - .2) / .14);      // some antes de chegar no texto à esquerda
+      s.el.style.opacity = ((.35 + front * .65) * edge).toFixed(3);
       s.el.style.zIndex = front > .5 ? 2 : 0;
     });
     // profundidade suave (lerp)

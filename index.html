@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OdontoClinic — Dentista em [BAIRRO], [CIDADE]</title>
-  <meta name="description" content="Odontologia acolhedora em [BAIRRO], [CIDADE]. Tratamentos personalizados com conforto, precisão e plano claro antes de começar. Agende sua avaliação pelo WhatsApp.">
+  <title>OdontoClinic — Dentista em Limeira/SP desde 1997</title>
+  <meta name="description" content="Odontologia acolhedora em Limeira/SP desde 1997. Tratamentos personalizados com conforto, precisão e plano claro antes de começar. Agende sua avaliação pelo WhatsApp.">
   <meta name="theme-color" content="#F7F8FC">
   <meta property="og:title" content="OdontoClinic — Cuidar do seu sorriso ficou simples">
   <meta property="og:description" content="Tratamentos personalizados pensados no seu conforto, na sua confiança e na saúde do seu sorriso.">
@@ -17,6 +17,7 @@
   <script>
     // Marca JS cedo para os estados iniciais das animações (sem "flash" de conteúdo)
     document.documentElement.classList.add('js');
+    try { if (sessionStorage.getItem('pt')) { document.documentElement.classList.add('pt-enter'); sessionStorage.removeItem('pt'); } } catch (e) {}
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduced');
     // Rede de segurança: se o script principal falhar ou demorar, a apresentação sai e o conteúdo aparece
     (function () {
@@ -43,10 +44,8 @@
     "telephone": "+55 11 90000-0000",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "[RUA, NÚMERO]",
-      "addressLocality": "[CIDADE]",
-      "addressRegion": "[UF]",
-      "postalCode": "[CEP]",
+      "addressLocality": "Limeira",
+      "addressRegion": "SP",
       "addressCountry": "BR"
     },
     "openingHours": ["Mo-Fr 08:00-19:00", "Sa 08:00-12:00"],
@@ -82,6 +81,10 @@
     </defs>
   </svg>
 
+  <!-- Transição entre páginas -->
+  <div class="pt" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span>
+    <div class="pt__logo"><svg><use href="#i-tooth"/></svg>OdontoClinic</div></div>
+
   <!-- Intro: o dente se desenha e a cortina sobe revelando o hero -->
   <div class="intro" aria-hidden="true">
     <svg class="intro__mark" viewBox="0 0 24 24"><path pathLength="1" d="M12 5.5C10.5 4 8.6 3.2 6.8 3.6 4.3 4.1 3 6.6 3.4 9.4c.3 2.2 1.3 3.6 1.8 5.6.5 2.2.6 5.6 2.4 6 1.6.3 2-2.6 2.6-4.4.4-1.2 1-1.7 1.8-1.7s1.4.5 1.8 1.7c.6 1.8 1 4.7 2.6 4.4 1.8-.4 1.9-3.8 2.4-6 .5-2 1.5-3.4 1.8-5.6.4-2.8-.9-5.3-3.4-5.8-1.8-.4-3.7.4-5.2 1.9z"/></svg>
@@ -100,10 +103,11 @@
         <span class="logo__name">OdontoClinic</span>
       </a>
       <nav class="nav" aria-label="Principal">
+        <a href="sobre.html" data-page>Sobre nós</a>
         <a href="#tratamentos">Tratamentos</a>
-        <a href="#dentistas">Nossos dentistas</a>
-        <a href="#jornada">Cuidado ao paciente</a>
-        <a href="#galeria">Galeria de sorrisos</a>
+        <a href="#dentistas">Dentistas</a>
+        <a href="#jornada">Jornada</a>
+        <a href="#galeria">Galeria</a>
         <a href="#contato">Contato</a>
         <span class="nav__indicator" aria-hidden="true"></span>
       </nav>
@@ -120,6 +124,7 @@
   <!-- Menu mobile em tela cheia -->
   <div class="menu" id="menu" hidden>
     <nav class="menu__links" aria-label="Menu">
+      <a href="sobre.html" data-page><span>Sobre nós</span></a>
       <a href="#tratamentos"><span>Tratamentos</span></a>
       <a href="#dentistas"><span>Nossos dentistas</span></a>
       <a href="#jornada"><span>Cuidado ao paciente</span></a>
@@ -173,7 +178,7 @@
           <div class="stage__tilt" data-tilt>
             <svg class="orbits" viewBox="0 0 1024 572" aria-hidden="true">
               <ellipse class="orbit" cx="512" cy="260" rx="300" ry="62"/>
-              <ellipse class="orbit orbit--2" cx="512" cy="300" rx="420" ry="92"/>
+              <ellipse class="orbit orbit--2" cx="512" cy="300" rx="380" ry="86"/>
             </svg>
             <img class="implant" src="assets/hero-implante.webp" alt="Implante dentário: coroa de cerâmica branca sobre pino de titânio, entre dentes naturais" width="1024" height="572" fetchpriority="high" decoding="async">
 
@@ -217,21 +222,7 @@
             <span><strong>4,9 no Google</strong><small>750+ avaliações</small></span>
           </div>
         </div>
-        <div class="glass glass--b" data-depth="14" aria-hidden="true">
-          <div class="glass__in">
-            <span class="glass__ic glass__ic--ok"><svg><use href="#i-check"/></svg></span>
-            <span><strong>Anestesia sem dor</strong><small>Conforto em cada etapa</small></span>
-          </div>
-        </div>
 
-        <!-- avatares + tooltip com nota -->
-        <div class="trust" data-hero-fade tabindex="0" aria-describedby="trust-tip">
-          <div class="avatars" aria-hidden="true">
-            <span class="av"><b>A</b><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span><span class="av"><b>M</b><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span><span class="av"><b>R</b><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&w=96&h=96&q=70" alt="" width="36" height="36" loading="lazy"></span>
-          </div>
-          <p>Pacientes que confiam<br>no nosso cuidado.</p>
-          <span class="trust__tip" role="tooltip" id="trust-tip"><svg><use href="#i-star"/></svg> 4,9 no Google</span>
-        </div>
 
         <!-- chips que trocam as anotações -->
         <div class="chips" role="group" aria-label="Escolha um valor para ver os detalhes">
@@ -242,11 +233,6 @@
           <button type="button" class="chip" data-chip="seguro">Seguro</button>
         </div>
 
-        <div class="hero__foot" data-hero-fade>
-          <span>Conforto em<br>primeiro lugar</span>
-          <span>Tecnologia<br>de ponta</span>
-          <span>Tratamento pensado<br>para você</span>
-        </div>
       </div>
     </section>
 
@@ -255,22 +241,8 @@
       <div class="band__mist" aria-hidden="true"></div>
       <div class="marquee" data-marquee>
         <div class="marquee__track">
-          <ul>
-            <li>[Convênio 1]</li><li class="dot" aria-hidden="true"></li>
-            <li>[Convênio 2]</li><li class="dot" aria-hidden="true"></li>
-            <li>[Convênio 3]</li><li class="dot" aria-hidden="true"></li>
-            <li>Atendimento em [BAIRRO] desde [ANO]</li><li class="dot" aria-hidden="true"></li>
-            <li>Biossegurança certificada</li><li class="dot" aria-hidden="true"></li>
-            <li>[Convênio 4]</li><li class="dot" aria-hidden="true"></li>
-          </ul>
-          <ul aria-hidden="true">
-            <li>[Convênio 1]</li><li class="dot"></li>
-            <li>[Convênio 2]</li><li class="dot"></li>
-            <li>[Convênio 3]</li><li class="dot"></li>
-            <li>Atendimento em [BAIRRO] desde [ANO]</li><li class="dot"></li>
-            <li>Biossegurança certificada</li><li class="dot"></li>
-            <li>[Convênio 4]</li><li class="dot"></li>
-          </ul>
+          <ul><li>Atendimento em Limeira desde 1997</li><li class="dot" aria-hidden="true"></li><li>Biossegurança certificada</li><li class="dot" aria-hidden="true"></li><li>Especialistas em todas as áreas</li><li class="dot" aria-hidden="true"></li><li>Das crianças aos idosos</li><li class="dot" aria-hidden="true"></li><li>Agendamento pelo WhatsApp</li><li class="dot" aria-hidden="true"></li><li>Condições acessíveis</li><li class="dot" aria-hidden="true"></li></ul>
+          <ul aria-hidden="true"><li>Atendimento em Limeira desde 1997</li><li class="dot"></li><li>Biossegurança certificada</li><li class="dot"></li><li>Especialistas em todas as áreas</li><li class="dot"></li><li>Das crianças aos idosos</li><li class="dot"></li><li>Agendamento pelo WhatsApp</li><li class="dot"></li><li>Condições acessíveis</li><li class="dot"></li></ul>
         </div>
         <button class="marquee__toggle" type="button" aria-label="Pausar faixa" data-marquee-toggle>
           <svg><use href="#i-pause"/></svg>
@@ -333,7 +305,7 @@
           <svg class="about__annot" viewBox="0 0 300 120" aria-hidden="true" data-draw>
             <path d="M8 112 L120 40 L292 40"/><circle cx="8" cy="112" r="4"/><circle cx="292" cy="40" r="4"/>
           </svg>
-          <span class="about__since" data-reveal style="--d:4">Desde [ANO]</span>
+          <span class="about__since" data-reveal style="--d:4">Desde 1997</span>
         </div>
         <div class="about__copy">
           <h2 class="stitle" id="t-about">
@@ -345,7 +317,7 @@
             </span>
           </h2>
           <p data-reveal style="--d:3">[Texto institucional do site atual, reescrito no tom acolhedor.] Aqui, cada tratamento começa com uma conversa. Explicamos cada etapa, respeitamos o seu tempo e cuidamos para que você se sinta seguro do começo ao fim.</p>
-          <a class="btn btn--ghost" href="#dentistas" data-reveal style="--d:4">
+          <a class="btn btn--ghost" href="sobre.html" data-page data-reveal style="--d:4">
             <span class="btn__pill">Conheça a clínica</span>
             <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
           </a>
@@ -682,7 +654,7 @@
       </div>
       <div data-reveal>
         <h3>Endereço</h3>
-        <p><svg class="fi"><use href="#i-pin"/></svg>[RUA, NÚMERO] — [BAIRRO], [CIDADE]/[UF]</p>
+        <p><svg class="fi"><use href="#i-pin"/></svg>Centro — Limeira/SP</p>
         <p><svg class="fi"><use href="#i-clock"/></svg>Seg a sex 8h–19h · Sáb 8h–12h [confirmar]</p>
       </div>
       <div data-reveal>
@@ -728,6 +700,7 @@
     </div>
   </dialog>
 
+  <script src="pt.js?v=dev" defer></script>
   <script src="main.js?v=dev" defer></script>
 </body>
 </html>
