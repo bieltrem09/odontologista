@@ -730,6 +730,75 @@ html.modal-open { overflow: hidden; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }
 
 /* =========================================================
+   Efeitos inspirados em componentes do 21st.dev
+   ========================================================= */
+
+/* Reading Text Reveal — palavras acendem conforme a rolagem */
+.manifesto { padding: clamp(80px, 12vw, 160px) 0 clamp(40px, 6vw, 80px); }
+.manifesto__text { max-width: 1100px; font: 500 clamp(1.7rem, 3.6vw, 3.2rem)/1.22 var(--font-head); letter-spacing: -.025em; }
+.manifesto__text .w { color: var(--ink); opacity: var(--o, .16); transition: opacity .25s linear; }
+.manifesto__text em { font-style: normal; }
+.manifesto__text em .w { color: var(--brand); }
+.reduced .manifesto__text .w { opacity: 1; }
+
+/* Spotlight Card — luz suave que segue o cursor */
+.spot-host { position: relative; isolation: isolate; }
+.spot-light {
+  position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(140,155,245,.22), transparent 65%);
+  transition: opacity .4s var(--ease);
+}
+.spot-light--light { background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.22), transparent 65%); z-index: 1; }
+.spot-host:hover > .spot-light { opacity: 1; }
+
+/* Shining Button — brilho que atravessa o botão */
+.btn--primary .btn__pill { position: relative; overflow: hidden; }
+.btn--primary .btn__pill::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 45%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: translateX(-130%) skewX(-18deg); pointer-events: none;
+}
+.btn--primary:hover .btn__pill::after { transform: translateX(260%) skewX(-18deg); transition: transform .85s var(--ease); }
+.btn--shine .btn__pill::after { animation: shine 6s var(--ease-io) 3s infinite; }
+@keyframes shine { 0%, 82% { transform: translateX(-130%) skewX(-18deg); } 100% { transform: translateX(260%) skewX(-18deg); } }
+
+/* Border Beam — feixe de luz percorrendo a borda */
+.form { position: relative; }
+.beam {
+  position: absolute; inset: 0; z-index: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; overflow: hidden;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.beam::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 220%; aspect-ratio: 1; translate: -50% -50%;
+  background: conic-gradient(from 0deg, transparent 0 72%, rgba(140,155,245,.0) 72%, var(--brand-soft) 88%, var(--brand) 96%, transparent 100%);
+  animation: beam 7s linear infinite;
+}
+.form > *:not(.beam):not(.spot-light) { position: relative; z-index: 1; }
+@keyframes beam { to { rotate: 360deg; } }
+
+/* Scroll Velocity Text — faixa que acelera com a rolagem */
+.velo { overflow: hidden; padding: clamp(40px, 6vw, 72px) 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.velo__row { display: flex; white-space: nowrap; }
+.velo__track { display: flex; align-items: center; flex: none; will-change: transform; }
+.velo__track span { padding-inline: clamp(16px, 2.4vw, 36px); font: 600 clamp(3rem, 8vw, 7.5rem)/1.05 var(--font-head); letter-spacing: -.04em; color: var(--ink); }
+.velo__track i { flex: none; width: clamp(12px, 1.4vw, 20px); height: clamp(12px, 1.4vw, 20px); border-radius: 999px; background: var(--brand-soft); }
+.velo__row--outline span { color: transparent; -webkit-text-stroke: 1.5px var(--brand-soft); }
+.velo__row--outline i { background: transparent; box-shadow: inset 0 0 0 1.5px var(--brand-soft); }
+
+/* Aurora — luzes suaves flutuando atrás do card final */
+.aurora { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.aurora span { position: absolute; width: 55%; aspect-ratio: 1; border-radius: 50%; filter: blur(70px); opacity: .55; mix-blend-mode: multiply; }
+.aurora span:nth-child(1) { left: -10%; bottom: -35%; background: var(--mist); animation: aur1 18s var(--ease-io) infinite alternate; }
+.aurora span:nth-child(2) { left: 30%; bottom: -45%; background: #B9C3FF; animation: aur2 22s var(--ease-io) infinite alternate; }
+.aurora span:nth-child(3) { right: -15%; bottom: -30%; background: #D9CCFF; animation: aur3 20s var(--ease-io) infinite alternate; }
+.aurora span:nth-child(4) { right: 10%; top: -50%; width: 40%; background: #E3F0FF; animation: aur2 26s var(--ease-io) infinite alternate-reverse; }
+@keyframes aur1 { to { transform: translate(25%, -18%) scale(1.15); } }
+@keyframes aur2 { to { transform: translate(-20%, -12%) scale(.9); } }
+@keyframes aur3 { to { transform: translate(-18%, -22%) scale(1.2); } }
+
+/* =========================================================
    Responsivo (mobile-first nos ajustes abaixo)
    ========================================================= */
 @media (max-width: 1180px) {
@@ -803,6 +872,8 @@ html.modal-open { overflow: hidden; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   .marquee__track { animation: none !important; }
   .marquee__toggle { display: none; }
+  .aurora span, .beam::before, .btn--shine .btn__pill::after { animation: none !important; }
+  .velo__track { transform: none !important; }
   .tm__track { animation: none !important; }
   .tm { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
   [data-tm-toggle] { display: none; }

@@ -797,6 +797,84 @@
     map && io.observe(map);
   }
 
+  /* =========================================================
+     Efeitos inspirados em componentes do 21st.dev
+     ========================================================= */
+
+  // Reading Text Reveal: quebra o texto em palavras (preservando <em>) e acende conforme a rolagem
+  const readEl = $('[data-read]');
+  let readWords = [];
+  if (readEl) {
+    const wrapWords = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            const s = document.createElement('span'); s.className = 'w'; s.textContent = part; frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1) wrapWords(n);
+      });
+    };
+    wrapWords(readEl);
+    readWords = $$('.w', readEl);
+  }
+  function updateRead() {
+    if (!readEl || reduced()) return;
+    const r = readEl.getBoundingClientRect(), vh = innerHeight;
+    const p = clamp((vh * .85 - r.top) / (r.height + vh * .45));   // 0 → 1 enquanto o parágrafo atravessa a tela
+    const n = readWords.length;
+    readWords.forEach((w, i) => {
+      const local = clamp(p * (n + 4) - i, 0, 1);
+      w.style.setProperty('--o', (.16 + local * .84).toFixed(3));
+    });
+  }
+
+  // Spotlight Card: luz que segue o cursor
+  if (finePointer) {
+    $$('.tm-card, .form, .lead-card, .tcard, .gbadge, .step').forEach(el => {
+      const light = document.createElement('span');
+      light.className = 'spot-light' + (el.classList.contains('tcard') ? ' spot-light--light' : '');
+      el.classList.add('spot-host');
+      el.appendChild(light);
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        light.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        light.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
+
+  // Scroll Velocity Text: velocidade base + empurrão proporcional à velocidade da rolagem
+  const veloRows = $$('[data-velo]').map(row => ({ row, track: $('.velo__track', row), dir: +row.dataset.velo, x: 0, w: 0 }));
+  if (veloRows.length && !reduced()) {
+    const measureVelo = () => veloRows.forEach(v => { v.w = v.track.scrollWidth / 3; });
+    measureVelo(); addEventListener('resize', measureVelo); document.fonts?.ready.then(measureVelo);
+    let lastY = scrollY, boost = 0, visible = false, raf = null, last = performance.now();
+    const tick = now => {
+      const dt = Math.min(64, now - last) / 1000; last = now;
+      const dy = scrollY - lastY; lastY = scrollY;
+      boost += (Math.abs(dy) * 6 - boost) * 0.12;          // suaviza a aceleração
+      const dirFlip = dy < -1 ? -1 : 1;                     // rolar para cima inverte o sentido
+      veloRows.forEach(v => {
+        v.x -= v.dir * dirFlip * (40 + boost) * dt;
+        if (v.w) { v.x %= v.w; if (v.x > 0) v.x -= v.w; }
+        v.track.style.transform = `translate3d(${v.x}px,0,0)`;
+      });
+      raf = visible ? requestAnimationFrame(tick) : null;
+    };
+    new IntersectionObserver(([en]) => {
+      visible = en.isIntersecting;
+      if (visible && !raf) { last = performance.now(); lastY = scrollY; raf = requestAnimationFrame(tick); }
+    }).observe($('.velo'));
+  }
+
+  addEventListener('scroll', () => requestAnimationFrame(updateRead), { passive: true });
+  addEventListener('resize', updateRead);
+  updateRead();
+
   // ---------- Go ----------
   update();
   start();

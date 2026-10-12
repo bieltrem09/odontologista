@@ -104,7 +104,7 @@
         <a href="#contato">Contato</a>
         <span class="nav__indicator" aria-hidden="true"></span>
       </nav>
-      <a class="btn btn--primary header__cta" href="#" data-wa>
+      <a class="btn btn--primary btn--shine header__cta" href="#" data-wa>
         <span class="btn__pill">Agendar avaliação</span>
         <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
       </a>
@@ -142,7 +142,7 @@
             <span class="line"><span>simples.</span></span>
           </h1>
           <p class="hero__sub" data-hero-fade>Tratamentos personalizados pensados no seu conforto, na sua confiança e na saúde do seu sorriso a longo prazo.</p>
-          <a class="btn btn--primary hero__cta" href="#" data-wa data-hero-fade>
+          <a class="btn btn--primary btn--shine hero__cta" href="#" data-wa data-hero-fade>
             <span class="btn__pill">Agendar online</span>
             <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
           </a>
@@ -229,6 +229,14 @@
         <button class="marquee__toggle" type="button" aria-label="Pausar faixa" data-marquee-toggle>
           <svg><use href="#i-pause"/></svg>
         </button>
+      </div>
+    </section>
+
+    <!-- Manifesto — inspirado no "Reading Text Reveal" (21st.dev) -->
+    <section class="manifesto" aria-label="Nossa filosofia">
+      <div class="wrap">
+        <span class="slabel" data-reveal>Nossa filosofia /</span>
+        <p class="manifesto__text" data-read>Na OdontoClinic, cada sorriso começa com <em>uma conversa</em>. Explicamos cada etapa, respeitamos o seu tempo e só seguimos quando você se sente seguro — porque cuidar bem é, antes de tudo, <em>cuidar sem pressa</em>.</p>
       </div>
     </section>
 
@@ -476,6 +484,12 @@
       </div>
     </section>
 
+    <!-- Faixa animada — inspirada no "Scroll Velocity Text" (21st.dev) -->
+    <section class="velo" aria-hidden="true">
+      <div class="velo__row" data-velo="1"><div class="velo__track"><span>Sorriso</span><i></i><span>Confiança</span><i></i><span>Cuidado</span><i></i><span>Conforto</span><i></i><span>Precisão</span><i></i><span>Sorriso</span><i></i><span>Confiança</span><i></i><span>Cuidado</span><i></i><span>Conforto</span><i></i><span>Precisão</span><i></i><span>Sorriso</span><i></i><span>Confiança</span><i></i><span>Cuidado</span><i></i><span>Conforto</span><i></i><span>Precisão</span><i></i></div></div>
+      <div class="velo__row velo__row--outline" data-velo="-1"><div class="velo__track"><span>Sorriso</span><i></i><span>Confiança</span><i></i><span>Cuidado</span><i></i><span>Conforto</span><i></i><span>Precisão</span><i></i><span>Sorriso</span><i></i><span>Confiança</span><i></i><span>Cuidado</span><i></i><span>Conforto</span><i></i><span>Precisão</span><i></i><span>Sorriso</span><i></i><span>Confiança</span><i></i><span>Cuidado</span><i></i><span>Conforto</span><i></i><span>Precisão</span><i></i></div></div>
+    </section>
+
     <!-- 4.9 Depoimentos — adaptado do "Testimonials 13" (21st.dev) -->
     <section class="section testi" aria-labelledby="t-testi">
       <div class="wrap">
@@ -544,7 +558,7 @@
     <section class="section cta" id="contato" aria-labelledby="t-cta">
       <div class="wrap">
         <div class="cta__card" data-reveal="card">
-          <div class="cta__mist" aria-hidden="true"></div>
+          <div class="aurora" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
           <svg class="cta__tooth" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tooth"/></svg>
           <div class="cta__copy">
             <span class="slabel" data-reveal>Agende /</span>
@@ -565,6 +579,7 @@
           </div>
 
           <form class="form" id="form-agenda" novalidate data-form data-reveal style="--d:2">
+            <span class="beam" aria-hidden="true"></span>
             <div class="field">
               <label for="f-nome">Nome</label>
               <input id="f-nome" name="nome" autocomplete="name" required aria-describedby="e-nome">
