@@ -1,5 +1,5 @@
 /* =========================================================
-   [NOME DA CLÍNICA] — interações e movimento
+   OdontoClinic — interações e movimento
    Sem dependências. Princípio: movimento calmo, só transform/opacity,
    e prefers-reduced-motion leva tudo direto ao estado final.
    ========================================================= */
@@ -7,7 +7,7 @@
   'use strict';
 
   // ---------- Configuração da clínica ----------
-  const WA_NUMBER = '5500000000000'; // [DDI+DDD+NÚMERO] sem espaços
+  const WA_NUMBER = '5511900000000'; // FICTÍCIO — trocar pelo número real (DDI+DDD+número)
   const WA_DEFAULT = 'Olá! Vim pelo site e gostaria de agendar uma avaliação.';
 
   const TREATMENTS = [
@@ -38,10 +38,10 @@
   };
 
   const GALLERY = [
-    { tab: 'Lentes', cap: 'Lentes de contato dental · [duração do tratamento]' },
-    { tab: 'Clareamento', cap: 'Clareamento supervisionado · [duração do tratamento]' },
-    { tab: 'Implantes', cap: 'Implante unitário · [duração do tratamento]' },
-    { tab: 'Ortodontia', cap: 'Alinhadores transparentes · [duração do tratamento]' },
+    { tab: 'Lentes', slug: 'lentes', cap: 'Lentes de contato dental · 3 consultas' },
+    { tab: 'Clareamento', slug: 'clareamento', cap: 'Clareamento supervisionado · 3 semanas' },
+    { tab: 'Implantes', slug: 'implantes', cap: 'Implante unitário · 4 meses' },
+    { tab: 'Ortodontia', slug: 'ortodontia', cap: 'Alinhadores transparentes · 14 meses' },
   ];
 
   // ---------- Utilidades ----------
@@ -76,8 +76,12 @@
   mqReduced.addEventListener?.('change', () => html.classList.toggle('reduced', reduced()));
 
   // Imagens que falham (placeholders) somem e deixam o fundo em gradiente
+  // (fotos com data-fallback tentam a imagem reserva antes)
   document.addEventListener('error', e => {
-    if (e.target.tagName === 'IMG') e.target.classList.add('is-broken');
+    const img = e.target;
+    if (img.tagName !== 'IMG') return;
+    if (img.dataset.fallback && img.src !== img.dataset.fallback) { img.src = img.dataset.fallback; return; }
+    img.classList.add('is-broken');
   }, true);
 
   // ---------- WhatsApp em todos os CTAs ----------
@@ -587,6 +591,11 @@
       $('[data-ba-before]').textContent = `Foto “antes” — caso de ${g.tab.toLowerCase()}`;
       $('[data-ba-after]').textContent = `Foto “depois” — caso de ${g.tab.toLowerCase()}`;
       cap.textContent = g.cap;
+      for (const side of ['antes', 'depois']) {
+        const img = $(side === 'antes' ? '[data-ba-img-before]' : '[data-ba-img-after]');
+        img.classList.remove('is-broken');
+        img.src = `assets/ba-${g.slug}-${side}.webp`;
+      }
       ba.classList.remove('is-swapping'); cap.classList.remove('is-swapping');
     }, reduced() ? 0 : 320);
     animatePos(50, 600);
