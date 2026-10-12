@@ -9,7 +9,7 @@
   <meta property="og:title" content="[NOME DA CLÍNICA] — Cuidar do seu sorriso ficou simples">
   <meta property="og:description" content="Tratamentos personalizados pensados no seu conforto, na sua confiança e na saúde do seu sorriso.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/og-hero.jpg">
+  <meta property="og:image" content="https://bieltrem09.github.io/odontologista/assets/og-hero.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -136,109 +136,19 @@
         <!-- Palco do implante: SVG + anotações compartilham o mesmo sistema de coordenadas -->
         <div class="stage" data-stage>
           <div class="stage__tilt" data-tilt>
-            <svg class="implant" viewBox="0 0 1000 800" role="img" aria-label="Ilustração de um implante dentário: coroa branca sobre pino de titânio, entre dois dentes naturais">
-              <defs>
-                <radialGradient id="g-crown" cx="42%" cy="30%" r="75%">
-                  <stop offset="0" stop-color="#fff"/>
-                  <stop offset=".55" stop-color="#F3F5FB"/>
-                  <stop offset=".85" stop-color="#D9DEEC"/>
-                  <stop offset="1" stop-color="#C3CADD"/>
-                </radialGradient>
-                <radialGradient id="g-tooth" cx="45%" cy="35%" r="70%">
-                  <stop offset="0" stop-color="#fff"/>
-                  <stop offset=".7" stop-color="#E9ECF5"/>
-                  <stop offset="1" stop-color="#CBD1E2"/>
-                </radialGradient>
-                <linearGradient id="g-ti" x1="0" x2="1">
-                  <stop offset="0" stop-color="#6E7383"/>
-                  <stop offset=".18" stop-color="#C9CDD8"/>
-                  <stop offset=".34" stop-color="#F6F7FA"/>
-                  <stop offset=".5" stop-color="#9DA2B0"/>
-                  <stop offset=".68" stop-color="#E4E7EE"/>
-                  <stop offset=".86" stop-color="#8A8F9D"/>
-                  <stop offset="1" stop-color="#5E6373"/>
-                </linearGradient>
-                <linearGradient id="g-collar" x1="0" x2="1">
-                  <stop offset="0" stop-color="#7C8191"/>
-                  <stop offset=".3" stop-color="#FBFCFE"/>
-                  <stop offset=".55" stop-color="#B7BBC7"/>
-                  <stop offset=".8" stop-color="#EEF0F5"/>
-                  <stop offset="1" stop-color="#6F7484"/>
-                </linearGradient>
-                <linearGradient id="g-bone" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#EEF0F8" stop-opacity=".95"/>
-                  <stop offset="1" stop-color="#DCE1FF" stop-opacity=".6"/>
-                </linearGradient>
-                <pattern id="p-bone" width="22" height="22" patternUnits="userSpaceOnUse">
-                  <circle cx="5" cy="6" r="3.2" fill="#C9CFE3" opacity=".55"/>
-                  <circle cx="16" cy="15" r="2.4" fill="#C9CFE3" opacity=".45"/>
-                  <circle cx="15" cy="4" r="1.3" fill="#B9C0D8" opacity=".5"/>
-                </pattern>
-                <filter id="f-blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
-                <filter id="f-soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
-                <linearGradient id="g-fade" x1="0" x2="1">
-                  <stop offset="0" stop-color="#000"/><stop offset=".22" stop-color="#fff"/><stop offset=".78" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
-                </linearGradient>
-                <mask id="m-fade" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="800"><rect width="1000" height="800" fill="url(#g-fade)"/></mask>
-                <clipPath id="c-screw"><path d="M440 400 L560 400 L548 660 Q500 720 452 660 Z"/></clipPath>
-              </defs>
-
-              <!-- dentes vizinhos desfocados (profundidade de campo) -->
-              <g filter="url(#f-blur)" opacity=".9">
-                <path d="M120 330 C120 250 170 225 215 240 C245 222 285 222 315 245 C350 230 395 255 390 330 C386 420 360 470 330 500 L170 500 C140 470 122 420 120 330Z" fill="url(#g-tooth)"/>
-                <path d="M610 330 C605 255 650 230 685 245 C715 222 755 222 785 240 C830 225 880 250 880 330 C878 420 860 470 830 500 L670 500 C640 470 614 420 610 330Z" fill="url(#g-tooth)"/>
-              </g>
-
-              <!-- osso / gengiva estilizados -->
-<g mask="url(#m-fade)">
-              <path d="M40 470 C200 440 330 455 500 450 C670 455 800 440 960 470 L960 800 L40 800 Z" fill="url(#g-bone)"/>
-              <path d="M40 470 C200 440 330 455 500 450 C670 455 800 440 960 470 L960 800 L40 800 Z" fill="url(#p-bone)" opacity=".8"/>
-              </g>
-
-              <!-- sombra suave -->
-              <ellipse cx="500" cy="420" rx="120" ry="22" fill="#4A5BD6" opacity=".12" filter="url(#f-soft)"/>
-
-              <!-- pino de titânio rosqueado -->
-              <g class="implant__screw">
-                <path d="M440 400 L560 400 L548 660 Q500 720 452 660 Z" fill="url(#g-ti)"/>
-                <g clip-path="url(#c-screw)" fill="none" stroke-linecap="round">
-                  <g stroke="#4F5464" stroke-width="7" opacity=".55">
-                    <path d="M430 425 L570 410"/><path d="M430 455 L570 440"/><path d="M430 485 L570 470"/>
-                    <path d="M430 515 L570 500"/><path d="M430 545 L570 530"/><path d="M430 575 L570 560"/>
-                    <path d="M430 605 L570 590"/><path d="M430 635 L570 620"/><path d="M430 665 L570 650"/>
-                  </g>
-                  <g stroke="#FFFFFF" stroke-width="3" opacity=".7">
-                    <path d="M430 419 L570 404"/><path d="M430 449 L570 434"/><path d="M430 479 L570 464"/>
-                    <path d="M430 509 L570 494"/><path d="M430 539 L570 524"/><path d="M430 569 L570 554"/>
-                    <path d="M430 599 L570 584"/><path d="M430 629 L570 614"/><path d="M430 659 L570 644"/>
-                  </g>
-                </g>
-              </g>
-
-              <!-- colar / pilar -->
-              <rect x="432" y="368" width="136" height="40" rx="10" fill="url(#g-collar)"/>
-              <rect x="432" y="368" width="136" height="8" rx="4" fill="#fff" opacity=".6"/>
-
-              <!-- coroa cerâmica -->
-              <g class="implant__crown">
-                <path d="M392 230 C388 170 420 132 462 140 C480 118 520 118 538 140 C580 132 612 170 608 230 C606 300 590 345 560 372 L440 372 C410 345 394 300 392 230Z" fill="url(#g-crown)"/>
-                <path d="M425 205 C430 168 452 152 474 160" stroke="#fff" stroke-width="10" stroke-linecap="round" fill="none" opacity=".9"/>
-                <ellipse cx="455" cy="250" rx="16" ry="40" fill="#fff" opacity=".55"/>
-                <path d="M560 372 C590 345 606 300 608 230" stroke="#AEB6CC" stroke-width="5" fill="none" opacity=".5"/>
-              </g>
-            </svg>
+            <img class="implant" src="assets/hero-implante.webp" alt="Implante dentário: coroa de cerâmica branca sobre pino de titânio, entre dentes naturais" width="1024" height="572" fetchpriority="high" decoding="async">
 
             <!-- linhas de anotação (desenham-se no carregamento) -->
-            <svg class="annot-lines" viewBox="0 0 1000 800" aria-hidden="true">
+            <svg class="annot-lines" viewBox="0 0 1024 572" aria-hidden="true">
               <g class="annot-line" data-annot-line="0">
-                <path d="M585 215 L700 150 L860 150"/>
-                <circle cx="585" cy="215" r="5"/>
-                <circle cx="860" cy="150" r="5"/>
+                <path d="M602 132 L690 82 L862 82"/>
+                <circle cx="602" cy="132" r="4"/>
+                <circle cx="862" cy="82" r="4"/>
               </g>
               <g class="annot-line" data-annot-line="1">
-                <path d="M565 390 L690 470 L860 470"/>
-                <circle cx="565" cy="390" r="5"/>
-                <circle cx="860" cy="470" r="5"/>
+                <path d="M578 250 L690 330 L882 330"/>
+                <circle cx="578" cy="250" r="4"/>
+                <circle cx="882" cy="330" r="4"/>
               </g>
             </svg>
           </div>
@@ -349,7 +259,7 @@
       <div class="wrap about__grid">
         <div class="about__media">
           <figure class="media media--tall" data-reveal="img">
-            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1100&q=70" alt="Dentista atendendo uma paciente que sorri na cadeira do consultório" width="1100" height="1000" loading="lazy" decoding="async">
+            <img src="assets/sobre.webp" alt="Dentista atendendo uma paciente que sorri na cadeira do consultório" width="1024" height="572" loading="lazy" decoding="async">
           </figure>
           <svg class="about__annot" viewBox="0 0 300 120" aria-hidden="true" data-draw>
             <path d="M8 112 L120 40 L292 40"/><circle cx="8" cy="112" r="4"/><circle cx="292" cy="40" r="4"/>

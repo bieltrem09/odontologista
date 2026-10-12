@@ -225,8 +225,8 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
 /* palco do implante */
 .stage {
   position: absolute; z-index: 2; left: 50%; bottom: 0;
-  width: min(1000px, 78vw, calc((100svh - 24px) * 1.06));
-  aspect-ratio: 5 / 4;
+  width: min(1100px, 80vw, calc((100svh - 24px) * 1.3));
+  aspect-ratio: 1024 / 572;
   transform: translate(-50%, calc(var(--hp) * 120px));
 }
 .stage__tilt {
@@ -235,7 +235,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
   transform-style: preserve-3d; will-change: transform;
 }
 .implant, .annot-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
-.implant { stroke: none; stroke-width: 0; overflow: visible; }
+.implant { object-fit: contain; -webkit-mask-image: radial-gradient(ellipse 50% 78% at 50% 42%, #000 50%, transparent 100%); mask-image: radial-gradient(ellipse 50% 78% at 50% 42%, #000 50%, transparent 100%); }
 .annot-lines { overflow: visible; }
 .annot-line path { fill: none; stroke: var(--brand-soft); stroke-width: 1.6; }
 .annot-line circle { fill: var(--brand-soft); stroke: #fff; stroke-width: 2.5; transform-box: fill-box; transform-origin: center; }
@@ -246,8 +246,8 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
   transform: translateY(-100%);
   font: 400 15px/1.3 var(--font-head); color: var(--ink-muted);
 }
-.annot--a { top: 18.75%; }
-.annot--b { top: 58.75%; }
+.annot--a { top: 14.3%; right: 15.8%; }
+.annot--b { top: 57.7%; right: 13.9%; }
 .annot__t, .annot__s { display: block; transition: opacity .35s var(--ease), transform .5s var(--ease), filter .35s; }
 .annot__t { color: var(--ink); }
 .annot.is-swapping .annot__t, .annot.is-swapping .annot__s { opacity: 0; transform: translateY(6px); filter: blur(3px); }
@@ -710,9 +710,8 @@ html.modal-open { overflow: hidden; }
   .hero__cta { display: flex; width: 100%; }
   .hero__cta .btn__pill { flex: 1; justify-content: center; }
   .stage { position: relative; left: auto; bottom: auto; width: 100%; aspect-ratio: auto; transform: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
-  .stage__tilt { position: relative; inset: auto; width: 116%; margin-inline: -8%; aspect-ratio: 5 / 4; animation: floaty 4s var(--ease-io) infinite alternate; }
+  .stage__tilt { position: relative; inset: auto; width: 120%; margin-inline: -10%; aspect-ratio: 1024 / 572; animation: floaty 4s var(--ease-io) infinite alternate; }
   .annot-lines { display: none; }
-  .implant { -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
   .annot { position: relative; inset: auto; transform: none; text-align: left; padding: 8px 14px; border-radius: 16px; background: #fff; box-shadow: var(--shadow); font-size: 13px; }
   .trust { position: relative; top: auto; right: auto; align-items: flex-start; text-align: left; flex-direction: row; align-items: center; padding: 24px var(--gutter) 0; }
   .trust__tip { left: var(--gutter); right: auto; }

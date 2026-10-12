@@ -11,22 +11,22 @@
   const WA_DEFAULT = 'Olá! Vim pelo site e gostaria de agendar uma avaliação.';
 
   const TREATMENTS = [
-    { name: 'Limpeza e prevenção', line: 'O cuidado que evita quase todo o resto.', img: 'photo-1606811841689-23dfddce3e95',
+    { name: 'Limpeza e prevenção', line: 'O cuidado que evita quase todo o resto.', img: 'assets/t-limpeza.webp', pos: '58%',
       what: 'Remoção de placa e tártaro, polimento e orientação de higiene.', who: 'Todas as idades, a cada 6 meses.', how: 'Consulta tranquila, sem dor, com explicação de cada etapa.', dur: '[40–60 min]' },
-    { name: 'Clareamento', line: 'Dentes mais claros, com segurança e sem sensibilidade exagerada.', img: 'photo-1588776814546-1ffcf47267a5',
+    { name: 'Clareamento', line: 'Dentes mais claros, com segurança e sem sensibilidade exagerada.', img: 'assets/t-clareamento.webp', pos: '50%',
       what: 'Clareamento supervisionado no consultório e/ou em casa com moldeiras.', who: 'Quem quer um sorriso mais claro e tem dentes e gengiva saudáveis.', how: 'Avaliação, proteção da gengiva e sessões com acompanhamento.', dur: '[2–4 semanas]' },
-    { name: 'Lentes de contato dental', line: 'Forma, cor e harmonia planejadas para o seu rosto.', img: 'photo-1609840114035-3c981b782dfe',
+    { name: 'Lentes de contato dental', line: 'Forma, cor e harmonia planejadas para o seu rosto.', img: 'assets/t-lentes.webp', pos: '62%',
       what: 'Lâminas finas de cerâmica coladas na frente dos dentes.', who: 'Quem deseja corrigir forma, cor ou pequenos espaços.', how: 'Planejamento digital, prova do sorriso e cimentação.', dur: '[2–4 consultas]' },
-    { name: 'Implantes', line: 'Um dente novo, firme e com aparência natural.', img: 'photo-1598256989800-fe5f95da9787',
+    { name: 'Implantes', line: 'Um dente novo, firme e com aparência natural.', img: 'assets/t-implantes.webp', pos: '50%',
       what: 'Pino de titânio que substitui a raiz e recebe uma coroa.', who: 'Quem perdeu um ou mais dentes.', how: 'Exames, planejamento 3D, instalação e, após a cicatrização, a coroa.', dur: '[3–6 meses]' },
-    { name: 'Ortodontia e alinhadores', line: 'Dentes alinhados com aparelho fixo ou transparente.', img: 'photo-1609840113929-6e8a0f0f9a38',
+    { name: 'Ortodontia e alinhadores', line: 'Dentes alinhados com aparelho fixo ou transparente.', img: 'assets/t-ortodontia.webp', pos: '50%',
       what: 'Correção da posição dos dentes e da mordida.', who: 'Crianças, adolescentes e adultos.', how: 'Documentação, plano de movimentação e consultas de acompanhamento.', dur: '[12–24 meses]' },
-    { name: 'Odontopediatria', line: 'A primeira experiência no dentista tem que ser boa.', img: 'photo-1588776814546-daab30f310ce',
+    { name: 'Odontopediatria', line: 'A primeira experiência no dentista tem que ser boa.', img: 'assets/t-odontopediatria.webp', pos: '30%',
       what: 'Cuidado odontológico especializado para crianças.', who: 'Bebês, crianças e adolescentes.', how: 'Ambiente lúdico, linguagem simples e muita paciência.', dur: '[30–45 min]' },
-    { name: 'Tratamento de canal', line: 'Alívio da dor, salvando o seu dente.', img: 'photo-1606265752439-1f18756aa5fc',
+    { name: 'Tratamento de canal', line: 'Alívio da dor, salvando o seu dente.', img: 'assets/t-canal.webp', pos: '22%',
       what: 'Limpeza e selamento da parte interna do dente.', who: 'Quem tem inflamação ou infecção na polpa do dente.', how: 'Anestesia, tratamento com instrumentos de precisão e restauração.', dur: '[1–3 sessões]' },
-    { name: '[Outro tratamento]', line: '[Frase curta sobre o tratamento do site atual.]', img: 'photo-1629909615184-74f495363b67',
-      what: '[O que é]', who: '[Para quem é]', how: '[Como funciona]', dur: '[Duração média]' },
+    { name: 'Ambiente acolhedor', line: 'Um consultório calmo, claro e pensado para você relaxar.', img: 'assets/t-ambiente.webp', pos: '45%',
+      what: 'Estrutura moderna, iluminação natural e equipamentos atualizados.', who: 'Todos os pacientes — principalmente quem tem receio de dentista.', how: 'Atendimento sem pressa, com cada etapa explicada antes de começar.', dur: '[Agende uma visita]' },
   ];
 
   const ANNOTS = {
@@ -55,7 +55,6 @@
   const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
   const easeInOutCubic = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
   const wait = ms => new Promise(r => setTimeout(r, ms));
-  const unsplash = (id, w) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=70`;
   const waLink = msg => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg || WA_DEFAULT)}`;
 
   function tween(dur, onUpdate, ease = easeOutCubic) {
@@ -415,7 +414,7 @@
     li.setAttribute('aria-label', `${i + 1} de ${TREATMENTS.length}`);
     li.innerHTML = `
       <button type="button" class="tcard" data-index="${i}" aria-haspopup="dialog">
-        <img src="${unsplash(t.img, 700)}" alt="" width="700" height="933" loading="lazy" decoding="async" draggable="false">
+        <img src="${t.img}" alt="" width="1024" height="572" style="object-position:${t.pos} 50%" loading="lazy" decoding="async" draggable="false">
         <span class="tcard__body">
           <span>
             <span class="tcard__name">${t.name}</span>
@@ -499,7 +498,7 @@
     cta.target = '_blank'; cta.rel = 'noopener';
     mImg.classList.remove('is-broken');
     mImg.alt = `Ilustração do tratamento: ${t.name}`;
-    mImg.src = unsplash(t.img, 900);
+    mImg.src = t.img;
 
     const cardImg = $('img', card);
     const show = () => { dialog.showModal(); html.classList.add('modal-open'); scroller.lock(true); };
