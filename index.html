@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[NOME DA CLÍNICA] — Dentista em [BAIRRO], [CIDADE]</title>
+  <meta name="description" content="Odontologia acolhedora em [BAIRRO], [CIDADE]. Tratamentos personalizados com conforto, precisão e plano claro antes de começar. Agende sua avaliação pelo WhatsApp.">
+  <meta name="theme-color" content="#F7F8FC">
+  <meta property="og:title" content="[NOME DA CLÍNICA] — Cuidar do seu sorriso ficou simples">
+  <meta property="og:description" content="Tratamentos personalizados pensados no seu conforto, na sua confiança e na saúde do seu sorriso.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-hero.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Marca JS cedo para os estados iniciais das animações (sem "flash" de conteúdo)
+    document.documentElement.classList.add('js');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduced');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "name": "[NOME DA CLÍNICA]",
+    "image": "assets/og-hero.jpg",
+    "telephone": "+55 [DDD] [TELEFONE]",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "[RUA, NÚMERO]",
+      "addressLocality": "[CIDADE]",
+      "addressRegion": "[UF]",
+      "postalCode": "[CEP]",
+      "addressCountry": "BR"
+    },
+    "openingHours": ["Mo-Fr 08:00-19:00", "Sa 08:00-12:00"],
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "[4.9]", "reviewCount": "[750]" }
+  }
+  </script>
+</head>
+<body>
+  <!-- Sprite de ícones (Lucide, traço 1.5) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+      <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16"/><path d="M4 16h16"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3 20 12 6 21Z"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.5 2.3a.5.5 0 0 1 .9 0l2.3 4.7a2 2 0 0 0 1.6 1.1l5.2.8a.5.5 0 0 1 .3.9l-3.8 3.7a2 2 0 0 0-.6 1.9l.9 5.2a.5.5 0 0 1-.8.6l-4.6-2.5a2 2 0 0 0-2 0l-4.6 2.5a.5.5 0 0 1-.8-.6l.9-5.2a2 2 0 0 0-.6-1.9L1.8 9.8a.5.5 0 0 1 .3-.9l5.2-.8a2 2 0 0 0 1.6-1.1z"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9 10h.01"/><path d="M12 10h.01"/><path d="M15 10h.01"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2"/></symbol>
+      <symbol id="i-insta" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z"/><path d="M17.5 6.5h.01"/></symbol>
+      <symbol id="i-move" viewBox="0 0 24 24"><path d="m18 8 4 4-4 4"/><path d="m6 8-4 4 4 4"/><path d="M2 12h20"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-tooth" viewBox="0 0 24 24"><path d="M12 5.5C10.5 4 8.6 3.2 6.8 3.6 4.3 4.1 3 6.6 3.4 9.4c.3 2.2 1.3 3.6 1.8 5.6.5 2.2.6 5.6 2.4 6 1.6.3 2-2.6 2.6-4.4.4-1.2 1-1.7 1.8-1.7s1.4.5 1.8 1.7c.6 1.8 1 4.7 2.6 4.4 1.8-.4 1.9-3.8 2.4-6 .5-2 1.5-3.4 1.8-5.6.4-2.8-.9-5.3-3.4-5.8-1.8-.4-3.7.4-5.2 1.9z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Intro: o dente se desenha e a cortina sobe revelando o hero -->
+  <div class="intro" aria-hidden="true">
+    <svg class="intro__mark" viewBox="0 0 24 24"><path pathLength="1" d="M12 5.5C10.5 4 8.6 3.2 6.8 3.6 4.3 4.1 3 6.6 3.4 9.4c.3 2.2 1.3 3.6 1.8 5.6.5 2.2.6 5.6 2.4 6 1.6.3 2-2.6 2.6-4.4.4-1.2 1-1.7 1.8-1.7s1.4.5 1.8 1.7c.6 1.8 1 4.7 2.6 4.4 1.8-.4 1.9-3.8 2.4-6 .5-2 1.5-3.4 1.8-5.6.4-2.8-.9-5.3-3.4-5.8-1.8-.4-3.7.4-5.2 1.9z"/></svg>
+    <span class="intro__name">[NOME DA CLÍNICA]</span>
+  </div>
+
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- 4.1 Header -->
+  <header class="header" data-header>
+    <div class="header__inner">
+      <a href="#topo" class="logo" aria-label="[NOME DA CLÍNICA] — início">
+        <span class="logo__mark"><svg><use href="#i-tooth"/></svg></span>
+        <span class="logo__name">[NOME DA CLÍNICA]</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#tratamentos">Tratamentos</a>
+        <a href="#dentistas">Nossos dentistas</a>
+        <a href="#jornada">Cuidado ao paciente</a>
+        <a href="#galeria">Galeria de sorrisos</a>
+        <a href="#contato">Contato</a>
+        <span class="nav__indicator" aria-hidden="true"></span>
+      </nav>
+      <a class="btn btn--primary header__cta" href="#" data-wa>
+        <span class="btn__pill">Agendar avaliação</span>
+        <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menu mobile em tela cheia -->
+  <div class="menu" id="menu" hidden>
+    <nav class="menu__links" aria-label="Menu">
+      <a href="#tratamentos"><span>Tratamentos</span></a>
+      <a href="#dentistas"><span>Nossos dentistas</span></a>
+      <a href="#jornada"><span>Cuidado ao paciente</span></a>
+      <a href="#galeria"><span>Galeria de sorrisos</span></a>
+      <a href="#contato"><span>Contato</span></a>
+    </nav>
+    <a class="btn btn--primary btn--block menu__wa" href="#" data-wa>
+      <span class="btn__pill">Chamar no WhatsApp</span>
+      <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+    </a>
+  </div>
+
+  <main id="conteudo">
+    <!-- 4.2 Hero -->
+    <section class="hero" id="topo" aria-labelledby="hero-title">
+      <div class="hero__card" data-hero-card>
+        <div class="hero__mist" aria-hidden="true"></div>
+
+        <div class="hero__copy">
+          <h1 class="hero__title" id="hero-title" data-split>
+            <span class="line"><span>Cuidar do seu</span></span>
+            <span class="line"><span>sorriso ficou</span></span>
+            <span class="line"><span>simples.</span></span>
+          </h1>
+          <p class="hero__sub" data-hero-fade>Tratamentos personalizados pensados no seu conforto, na sua confiança e na saúde do seu sorriso a longo prazo.</p>
+          <a class="btn btn--primary hero__cta" href="#" data-wa data-hero-fade>
+            <span class="btn__pill">Agendar online</span>
+            <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+          </a>
+        </div>
+
+        <!-- Palco do implante: SVG + anotações compartilham o mesmo sistema de coordenadas -->
+        <div class="stage" data-stage>
+          <div class="stage__tilt" data-tilt>
+            <svg class="implant" viewBox="0 0 1000 800" role="img" aria-label="Ilustração de um implante dentário: coroa branca sobre pino de titânio, entre dois dentes naturais">
+              <defs>
+                <radialGradient id="g-crown" cx="42%" cy="30%" r="75%">
+                  <stop offset="0" stop-color="#fff"/>
+                  <stop offset=".55" stop-color="#F3F5FB"/>
+                  <stop offset=".85" stop-color="#D9DEEC"/>
+                  <stop offset="1" stop-color="#C3CADD"/>
+                </radialGradient>
+                <radialGradient id="g-tooth" cx="45%" cy="35%" r="70%">
+                  <stop offset="0" stop-color="#fff"/>
+                  <stop offset=".7" stop-color="#E9ECF5"/>
+                  <stop offset="1" stop-color="#CBD1E2"/>
+                </radialGradient>
+                <linearGradient id="g-ti" x1="0" x2="1">
+                  <stop offset="0" stop-color="#6E7383"/>
+                  <stop offset=".18" stop-color="#C9CDD8"/>
+                  <stop offset=".34" stop-color="#F6F7FA"/>
+                  <stop offset=".5" stop-color="#9DA2B0"/>
+                  <stop offset=".68" stop-color="#E4E7EE"/>
+                  <stop offset=".86" stop-color="#8A8F9D"/>
+                  <stop offset="1" stop-color="#5E6373"/>
+                </linearGradient>
+                <linearGradient id="g-collar" x1="0" x2="1">
+                  <stop offset="0" stop-color="#7C8191"/>
+                  <stop offset=".3" stop-color="#FBFCFE"/>
+                  <stop offset=".55" stop-color="#B7BBC7"/>
+                  <stop offset=".8" stop-color="#EEF0F5"/>
+                  <stop offset="1" stop-color="#6F7484"/>
+                </linearGradient>
+                <linearGradient id="g-bone" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#EEF0F8" stop-opacity=".95"/>
+                  <stop offset="1" stop-color="#DCE1FF" stop-opacity=".6"/>
+                </linearGradient>
+                <pattern id="p-bone" width="22" height="22" patternUnits="userSpaceOnUse">
+                  <circle cx="5" cy="6" r="3.2" fill="#C9CFE3" opacity=".55"/>
+                  <circle cx="16" cy="15" r="2.4" fill="#C9CFE3" opacity=".45"/>
+                  <circle cx="15" cy="4" r="1.3" fill="#B9C0D8" opacity=".5"/>
+                </pattern>
+                <filter id="f-blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+                <filter id="f-soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+                <linearGradient id="g-fade" x1="0" x2="1">
+                  <stop offset="0" stop-color="#000"/><stop offset=".22" stop-color="#fff"/><stop offset=".78" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+                </linearGradient>
+                <mask id="m-fade" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="800"><rect width="1000" height="800" fill="url(#g-fade)"/></mask>
+                <clipPath id="c-screw"><path d="M440 400 L560 400 L548 660 Q500 720 452 660 Z"/></clipPath>
+              </defs>
+
+              <!-- dentes vizinhos desfocados (profundidade de campo) -->
+              <g filter="url(#f-blur)" opacity=".9">
+                <path d="M120 330 C120 250 170 225 215 240 C245 222 285 222 315 245 C350 230 395 255 390 330 C386 420 360 470 330 500 L170 500 C140 470 122 420 120 330Z" fill="url(#g-tooth)"/>
+                <path d="M610 330 C605 255 650 230 685 245 C715 222 755 222 785 240 C830 225 880 250 880 330 C878 420 860 470 830 500 L670 500 C640 470 614 420 610 330Z" fill="url(#g-tooth)"/>
+              </g>
+
+              <!-- osso / gengiva estilizados -->
+<g mask="url(#m-fade)">
+              <path d="M40 470 C200 440 330 455 500 450 C670 455 800 440 960 470 L960 800 L40 800 Z" fill="url(#g-bone)"/>
+              <path d="M40 470 C200 440 330 455 500 450 C670 455 800 440 960 470 L960 800 L40 800 Z" fill="url(#p-bone)" opacity=".8"/>
+              </g>
+
+              <!-- sombra suave -->
+              <ellipse cx="500" cy="420" rx="120" ry="22" fill="#4A5BD6" opacity=".12" filter="url(#f-soft)"/>
+
+              <!-- pino de titânio rosqueado -->
+              <g class="implant__screw">
+                <path d="M440 400 L560 400 L548 660 Q500 720 452 660 Z" fill="url(#g-ti)"/>
+                <g clip-path="url(#c-screw)" fill="none" stroke-linecap="round">
+                  <g stroke="#4F5464" stroke-width="7" opacity=".55">
+                    <path d="M430 425 L570 410"/><path d="M430 455 L570 440"/><path d="M430 485 L570 470"/>
+                    <path d="M430 515 L570 500"/><path d="M430 545 L570 530"/><path d="M430 575 L570 560"/>
+                    <path d="M430 605 L570 590"/><path d="M430 635 L570 620"/><path d="M430 665 L570 650"/>
+                  </g>
+                  <g stroke="#FFFFFF" stroke-width="3" opacity=".7">
+                    <path d="M430 419 L570 404"/><path d="M430 449 L570 434"/><path d="M430 479 L570 464"/>
+                    <path d="M430 509 L570 494"/><path d="M430 539 L570 524"/><path d="M430 569 L570 554"/>
+                    <path d="M430 599 L570 584"/><path d="M430 629 L570 614"/><path d="M430 659 L570 644"/>
+                  </g>
+                </g>
+              </g>
+
+              <!-- colar / pilar -->
+              <rect x="432" y="368" width="136" height="40" rx="10" fill="url(#g-collar)"/>
+              <rect x="432" y="368" width="136" height="8" rx="4" fill="#fff" opacity=".6"/>
+
+              <!-- coroa cerâmica -->
+              <g class="implant__crown">
+                <path d="M392 230 C388 170 420 132 462 140 C480 118 520 118 538 140 C580 132 612 170 608 230 C606 300 590 345 560 372 L440 372 C410 345 394 300 392 230Z" fill="url(#g-crown)"/>
+                <path d="M425 205 C430 168 452 152 474 160" stroke="#fff" stroke-width="10" stroke-linecap="round" fill="none" opacity=".9"/>
+                <ellipse cx="455" cy="250" rx="16" ry="40" fill="#fff" opacity=".55"/>
+                <path d="M560 372 C590 345 606 300 608 230" stroke="#AEB6CC" stroke-width="5" fill="none" opacity=".5"/>
+              </g>
+            </svg>
+
+            <!-- linhas de anotação (desenham-se no carregamento) -->
+            <svg class="annot-lines" viewBox="0 0 1000 800" aria-hidden="true">
+              <g class="annot-line" data-annot-line="0">
+                <path d="M585 215 L700 150 L860 150"/>
+                <circle cx="585" cy="215" r="5"/>
+                <circle cx="860" cy="150" r="5"/>
+              </g>
+              <g class="annot-line" data-annot-line="1">
+                <path d="M565 390 L690 470 L860 470"/>
+                <circle cx="565" cy="390" r="5"/>
+                <circle cx="860" cy="470" r="5"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="annot annot--a" data-annot="0" aria-live="polite">
+            <span class="annot__t">Precisão digital</span>
+            <span class="annot__s">Tratamento avançado</span>
+          </div>
+          <div class="annot annot--b" data-annot="1" aria-live="polite">
+            <span class="annot__t">Encaixe personalizado</span>
+            <span class="annot__s">Acabamento natural</span>
+          </div>
+        </div>
+
+        <!-- avatares + tooltip com nota -->
+        <div class="trust" data-hero-fade tabindex="0" aria-describedby="trust-tip">
+          <div class="avatars" aria-hidden="true">
+            <span style="--h:228">A</span><span style="--h:200">M</span><span style="--h:255">R</span>
+          </div>
+          <p>Pacientes que confiam<br>no nosso cuidado.</p>
+          <span class="trust__tip" role="tooltip" id="trust-tip"><svg><use href="#i-star"/></svg> [4.9] no Google</span>
+        </div>
+
+        <!-- chips que trocam as anotações -->
+        <div class="chips" role="group" aria-label="Escolha um valor para ver os detalhes">
+          <button type="button" class="chip" data-chip="personalizado">Personalizado</button>
+          <button type="button" class="chip" data-chip="confiavel">Confiável</button>
+          <button type="button" class="chip" data-chip="confortavel">Confortável</button>
+          <button type="button" class="chip is-active" aria-pressed="true" data-chip="preciso">Preciso</button>
+          <button type="button" class="chip" data-chip="seguro">Seguro</button>
+        </div>
+
+        <div class="hero__foot" data-hero-fade>
+          <span>Conforto em<br>primeiro lugar</span>
+          <span>Tecnologia<br>de ponta</span>
+          <span>Tratamento pensado<br>para você</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4.3 Faixa de confiança (a névoa continua por trás) -->
+    <section class="band" aria-label="Convênios e selos">
+      <div class="band__mist" aria-hidden="true"></div>
+      <div class="marquee" data-marquee>
+        <div class="marquee__track">
+          <ul>
+            <li>[Convênio 1]</li><li class="dot" aria-hidden="true"></li>
+            <li>[Convênio 2]</li><li class="dot" aria-hidden="true"></li>
+            <li>[Convênio 3]</li><li class="dot" aria-hidden="true"></li>
+            <li>Atendimento em [BAIRRO] desde [ANO]</li><li class="dot" aria-hidden="true"></li>
+            <li>Biossegurança certificada</li><li class="dot" aria-hidden="true"></li>
+            <li>[Convênio 4]</li><li class="dot" aria-hidden="true"></li>
+          </ul>
+          <ul aria-hidden="true">
+            <li>[Convênio 1]</li><li class="dot"></li>
+            <li>[Convênio 2]</li><li class="dot"></li>
+            <li>[Convênio 3]</li><li class="dot"></li>
+            <li>Atendimento em [BAIRRO] desde [ANO]</li><li class="dot"></li>
+            <li>Biossegurança certificada</li><li class="dot"></li>
+            <li>[Convênio 4]</li><li class="dot"></li>
+          </ul>
+        </div>
+        <button class="marquee__toggle" type="button" aria-label="Pausar faixa" data-marquee-toggle>
+          <svg><use href="#i-pause"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- 4.4 Serviços -->
+    <section class="section services" id="tratamentos" aria-labelledby="t-serv">
+      <div class="wrap">
+        <div class="shead">
+          <h2 class="stitle" id="t-serv">
+            <span class="slabel" data-reveal>Nossos serviços /</span>
+            <span data-split>
+              <span class="line"><span>Conheça nossos</span></span>
+              <span class="line"><span>tratamentos de assinatura</span></span>
+            </span>
+          </h2>
+          <p class="shead__p" data-reveal style="--d:3">Odontologia moderna com conforto, precisão e atenção a cada detalhe. Um ambiente calmo e acolhedor, pensado para que cada visita seja tranquila.</p>
+        </div>
+
+        <div class="services__grid">
+          <aside class="services__aside" data-reveal>
+            <div class="reviews">
+              <div class="avatars" aria-hidden="true">
+                <span style="--h:228">J</span><span style="--h:210">L</span><span style="--h:245">C</span>
+              </div>
+              <div><strong class="reviews__n">[750+]</strong><span>avaliações</span></div>
+            </div>
+            <p>Veja o que nossos pacientes dizem sobre a experiência.</p>
+            <div class="carousel-ctrl">
+              <button class="ctrl ctrl--solid" type="button" data-car-prev aria-label="Tratamento anterior"><svg><use href="#i-left"/></svg></button>
+              <button class="ctrl" type="button" data-car-next aria-label="Próximo tratamento"><svg><use href="#i-right"/></svg></button>
+              <span class="counter" aria-live="polite"><b data-car-cur>01</b> / <span data-car-total>08</span></span>
+            </div>
+          </aside>
+
+          <div class="carousel" data-carousel tabindex="0" role="region" aria-roledescription="carrossel" aria-label="Tratamentos">
+            <ul class="carousel__track" data-car-track></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4.5 Sobre -->
+    <section class="section about" id="sobre" aria-labelledby="t-about">
+      <div class="wrap about__grid">
+        <div class="about__media">
+          <figure class="media media--tall" data-reveal="img">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1100&q=70" alt="Dentista atendendo uma paciente que sorri na cadeira do consultório" width="1100" height="1000" loading="lazy" decoding="async">
+          </figure>
+          <svg class="about__annot" viewBox="0 0 300 120" aria-hidden="true" data-draw>
+            <path d="M8 112 L120 40 L292 40"/><circle cx="8" cy="112" r="4"/><circle cx="292" cy="40" r="4"/>
+          </svg>
+          <span class="about__since" data-reveal style="--d:4">Desde [ANO]</span>
+        </div>
+        <div class="about__copy">
+          <h2 class="stitle" id="t-about">
+            <span class="slabel" data-reveal>Sobre nós /</span>
+            <span data-split>
+              <span class="line"><span>Excelência em</span></span>
+              <span class="line"><span>odontologia com</span></span>
+              <span class="line"><span>cuidado de verdade</span></span>
+            </span>
+          </h2>
+          <p data-reveal style="--d:3">[Texto institucional do site atual, reescrito no tom acolhedor.] Aqui, cada tratamento começa com uma conversa. Explicamos cada etapa, respeitamos o seu tempo e cuidamos para que você se sinta seguro do começo ao fim.</p>
+          <a class="btn btn--ghost" href="#dentistas" data-reveal style="--d:4">
+            <span class="btn__pill">Conheça a clínica</span>
+            <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <dl class="metrics" data-stagger>
+          <div class="metric" data-reveal>
+            <dt>Satisfação dos pacientes</dt>
+            <dd><span data-count="98" data-suffix="%">98%</span></dd>
+          </div>
+          <div class="metric" data-reveal>
+            <dt>Sorrisos transformados</dt>
+            <dd><span data-count="5" data-suffix=" mil+">5 mil+</span></dd>
+          </div>
+          <div class="metric" data-reveal>
+            <dt>Nota no Google</dt>
+            <dd><span data-count="4.9" data-decimals="1">4,9</span></dd>
+          </div>
+        </dl>
+        <p class="note">Valores entre colchetes no código: substituir pelos dados reais da clínica.</p>
+      </div>
+    </section>
+
+    <!-- 4.6 Dentistas -->
+    <section class="section team" id="dentistas" aria-labelledby="t-team">
+      <div class="wrap">
+        <div class="shead">
+          <h2 class="stitle" id="t-team">
+            <span class="slabel" data-reveal>Nossos dentistas /</span>
+            <span data-split>
+              <span class="line"><span>Rostos que você</span></span>
+              <span class="line"><span>vai conhecer pelo nome</span></span>
+            </span>
+          </h2>
+          <div class="lead-card" data-reveal style="--d:3">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=240&q=70" alt="Retrato do responsável técnico" width="72" height="72" loading="lazy">
+            <div>
+              <strong>[NOME DO DENTISTA]</strong>
+              <span>Responsável técnico · CRO-[UF] [NÚMERO]</span>
+              <em>[X] anos de experiência <span>([4.9] de nota)</span></em>
+            </div>
+          </div>
+        </div>
+
+        <ul class="team__grid" data-stagger>
+          <li class="doc" data-reveal>
+            <article class="doc__card" tabindex="0">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=70" alt="Retrato de [Dra. Nome], sorrindo no consultório" width="800" height="1000" loading="lazy">
+              <div class="doc__info">
+                <h3>[Dra. Nome Sobrenome]</h3>
+                <p>Odontopediatria · CRO-[UF] [Nº]</p>
+              </div>
+              <div class="doc__back">
+                <p class="doc__edu">[Formação / especialização]</p>
+                <p class="doc__quote">“Gosto de explicar cada etapa antes de começar.”</p>
+                <a class="btn btn--light btn--sm" href="#" data-wa="Olá! Gostaria de agendar uma avaliação com [Dra. Nome].">
+                  <span class="btn__pill">Agendar com [Dra. Nome]</span>
+                  <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+                </a>
+              </div>
+            </article>
+          </li>
+          <li class="doc" data-reveal>
+            <article class="doc__card" tabindex="0">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=70" alt="Retrato de [Dr. Nome], de jaleco" width="800" height="1000" loading="lazy">
+              <div class="doc__info">
+                <h3>[Dr. Nome Sobrenome]</h3>
+                <p>Implantodontia · CRO-[UF] [Nº]</p>
+              </div>
+              <div class="doc__back">
+                <p class="doc__edu">[Formação / especialização]</p>
+                <p class="doc__quote">“Planejo cada implante para que pareça seu desde o primeiro dia.”</p>
+                <a class="btn btn--light btn--sm" href="#" data-wa="Olá! Gostaria de agendar uma avaliação com [Dr. Nome].">
+                  <span class="btn__pill">Agendar com [Dr. Nome]</span>
+                  <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+                </a>
+              </div>
+            </article>
+          </li>
+          <li class="doc" data-reveal>
+            <article class="doc__card" tabindex="0">
+              <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=800&q=70" alt="Retrato de [Dra. Nome], de braços cruzados" width="800" height="1000" loading="lazy">
+              <div class="doc__info">
+                <h3>[Dra. Nome Sobrenome]</h3>
+                <p>Estética e lentes · CRO-[UF] [Nº]</p>
+              </div>
+              <div class="doc__back">
+                <p class="doc__edu">[Formação / especialização]</p>
+                <p class="doc__quote">“Um sorriso natural é aquele que combina com você.”</p>
+                <a class="btn btn--light btn--sm" href="#" data-wa="Olá! Gostaria de agendar uma avaliação com [Dra. Nome].">
+                  <span class="btn__pill">Agendar com [Dra. Nome]</span>
+                  <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+                </a>
+              </div>
+            </article>
+          </li>
+          <li class="doc" data-reveal>
+            <article class="doc__card" tabindex="0">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=800&q=70" alt="Retrato de [Dr. Nome], sorrindo" width="800" height="1000" loading="lazy">
+              <div class="doc__info">
+                <h3>[Dr. Nome Sobrenome]</h3>
+                <p>Ortodontia · CRO-[UF] [Nº]</p>
+              </div>
+              <div class="doc__back">
+                <p class="doc__edu">[Formação / especialização]</p>
+                <p class="doc__quote">“Alinhar dentes é também alinhar expectativas.”</p>
+                <a class="btn btn--light btn--sm" href="#" data-wa="Olá! Gostaria de agendar uma avaliação com [Dr. Nome].">
+                  <span class="btn__pill">Agendar com [Dr. Nome]</span>
+                  <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+                </a>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4.7 Jornada -->
+    <section class="section journey" id="jornada" aria-labelledby="t-jour" data-journey>
+      <div class="journey__bg" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="shead">
+          <h2 class="stitle" id="t-jour">
+            <span class="slabel" data-reveal>Sua primeira consulta /</span>
+            <span data-split>
+              <span class="line"><span>Sem pressa.</span></span>
+              <span class="line"><span>Sem surpresas.</span></span>
+            </span>
+          </h2>
+          <p class="shead__p" data-reveal style="--d:3">Se você tem receio de dentista, saiba exatamente o que vai acontecer — antes de chegar.</p>
+        </div>
+        <ol class="steps" data-stagger>
+          <li class="steps__rail" aria-hidden="true"><span data-rail></span></li>
+          <li class="step" data-reveal><span class="step__n">01</span><h3>Você chama no WhatsApp</h3><p>Respondemos rápido e encontramos um horário que funcione para você.</p></li>
+          <li class="step" data-reveal><span class="step__n">02</span><h3>Avaliação sem pressa</h3><p>Conversa, exame e fotos ou raio-X digitais. Você pode pausar quando quiser.</p></li>
+          <li class="step" data-reveal><span class="step__n">03</span><h3>Plano claro</h3><p>Você vê o tratamento, o tempo e o valor antes de decidir qualquer coisa.</p></li>
+          <li class="step" data-reveal><span class="step__n">04</span><h3>Tratamento confortável</h3><p>Com acompanhamento depois, para o resultado durar.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4.8 Galeria antes/depois -->
+    <section class="section gallery" id="galeria" aria-labelledby="t-gal">
+      <div class="wrap">
+        <div class="shead">
+          <h2 class="stitle" id="t-gal">
+            <span class="slabel" data-reveal>Galeria de sorrisos /</span>
+            <span data-split>
+              <span class="line"><span>Antes e depois</span></span>
+            </span>
+          </h2>
+          <div class="tabs" role="tablist" aria-label="Tratamentos da galeria" data-reveal style="--d:2">
+            <button role="tab" aria-selected="true" data-tab="0">Lentes</button>
+            <button role="tab" aria-selected="false" tabindex="-1" data-tab="1">Clareamento</button>
+            <button role="tab" aria-selected="false" tabindex="-1" data-tab="2">Implantes</button>
+            <button role="tab" aria-selected="false" tabindex="-1" data-tab="3">Ortodontia</button>
+            <span class="tabs__ink" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="ba" data-ba data-reveal="img" style="--pos:50%">
+          <div class="ba__layer ba__before"><div class="ba__ph"><svg><use href="#i-image"/></svg><span data-ba-before>Foto “antes” — caso de lentes</span></div></div>
+          <div class="ba__layer ba__after"><div class="ba__ph"><svg><use href="#i-image"/></svg><span data-ba-after>Foto “depois” — caso de lentes</span></div></div>
+          <span class="ba__tag ba__tag--l">Antes</span>
+          <span class="ba__tag ba__tag--r">Depois</span>
+          <div class="ba__handle" aria-hidden="true"><span><svg><use href="#i-move"/></svg></span></div>
+          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois">
+        </div>
+        <p class="ba__cap" data-ba-cap>Lentes de contato dental · [duração do tratamento]</p>
+        <p class="note">Publicar somente com autorização escrita do paciente e seguindo as normas de publicidade do CFO.</p>
+      </div>
+    </section>
+
+    <!-- 4.9 Depoimentos -->
+    <section class="section testi" aria-labelledby="t-testi">
+      <div class="wrap testi__grid">
+        <div>
+          <h2 class="stitle" id="t-testi">
+            <span class="slabel" data-reveal>Depoimentos /</span>
+            <span data-split>
+              <span class="line"><span>O que dizem</span></span>
+              <span class="line"><span>nossos pacientes</span></span>
+            </span>
+          </h2>
+          <a class="gbadge" href="[LINK DO GOOGLE]" data-reveal style="--d:3">
+            <span class="gbadge__stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+            Nota [4.9] em [N] avaliações no Google
+          </a>
+        </div>
+        <div class="testi__box" data-testi data-reveal style="--d:2" aria-roledescription="carrossel" role="region" aria-label="Depoimentos">
+          <div class="testi__stage">
+            <figure class="quote is-active" aria-roledescription="slide" aria-label="Depoimento 1 de 4">
+              <blockquote>“[Depoimento real do Google — até 3 linhas. Ex.: tinha pavor de dentista e saí tranquila, explicaram tudo antes.]”</blockquote>
+              <figcaption><span class="ini">AS</span><span><b>[Nome do paciente]</b><small>[Tratamento feito]</small></span></figcaption>
+            </figure>
+            <figure class="quote" aria-roledescription="slide" aria-label="Depoimento 2 de 4" aria-hidden="true">
+              <blockquote>“[Depoimento real do Google — sobre o atendimento e o ambiente da clínica.]”</blockquote>
+              <figcaption><span class="ini">RM</span><span><b>[Nome do paciente]</b><small>[Tratamento feito]</small></span></figcaption>
+            </figure>
+            <figure class="quote" aria-roledescription="slide" aria-label="Depoimento 3 de 4" aria-hidden="true">
+              <blockquote>“[Depoimento real do Google — sobre o resultado e o acompanhamento.]”</blockquote>
+              <figcaption><span class="ini">LC</span><span><b>[Nome do paciente]</b><small>[Tratamento feito]</small></span></figcaption>
+            </figure>
+            <figure class="quote" aria-roledescription="slide" aria-label="Depoimento 4 de 4" aria-hidden="true">
+              <blockquote>“[Depoimento real do Google — sobre o atendimento infantil ou familiar.]”</blockquote>
+              <figcaption><span class="ini">PF</span><span><b>[Nome do paciente]</b><small>[Tratamento feito]</small></span></figcaption>
+            </figure>
+          </div>
+          <div class="testi__ctrl">
+            <button class="ctrl ctrl--solid" type="button" data-t-prev aria-label="Depoimento anterior"><svg><use href="#i-left"/></svg></button>
+            <button class="ctrl" type="button" data-t-next aria-label="Próximo depoimento"><svg><use href="#i-right"/></svg></button>
+            <button class="ctrl" type="button" data-t-toggle aria-label="Pausar rotação"><svg><use href="#i-pause"/></svg></button>
+            <span class="testi__bar" aria-hidden="true"><span data-t-bar></span></span>
+            <span class="sr-only" aria-live="polite" data-t-live></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4.10 FAQ -->
+    <section class="section faq" aria-labelledby="t-faq">
+      <div class="wrap faq__grid">
+        <h2 class="stitle" id="t-faq">
+          <span class="slabel" data-reveal>Dúvidas /</span>
+          <span data-split>
+            <span class="line"><span>Perguntas</span></span>
+            <span class="line"><span>frequentes</span></span>
+          </span>
+        </h2>
+        <div class="acc" data-stagger>
+          <div class="acc__item" data-reveal>
+            <h3><button type="button" aria-expanded="false">Dói?<span class="acc__ic" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc__panel"><div><p>Usamos anestesia com técnica suave e explicamos cada etapa antes. Você pode pedir uma pausa a qualquer momento — basta levantar a mão.</p></div></div>
+          </div>
+          <div class="acc__item" data-reveal>
+            <h3><button type="button" aria-expanded="false">Aceitam convênio?<span class="acc__ic" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc__panel"><div><p>[Listar convênios aceitos pela clínica.]</p></div></div>
+          </div>
+          <div class="acc__item" data-reveal>
+            <h3><button type="button" aria-expanded="false">Como funciona a avaliação?<span class="acc__ic" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc__panel"><div><p>Uma conversa, exame clínico e, se necessário, imagens digitais. Você sai com um plano claro, com etapas, prazo e valores. [Informar condições da avaliação.]</p></div></div>
+          </div>
+          <div class="acc__item" data-reveal>
+            <h3><button type="button" aria-expanded="false">Atendem crianças?<span class="acc__ic" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc__panel"><div><p>[Sim, com odontopediatria — confirmar com a clínica.] O atendimento é adaptado para que a criança se sinta segura desde a primeira visita.</p></div></div>
+          </div>
+          <div class="acc__item" data-reveal>
+            <h3><button type="button" aria-expanded="false">Posso parcelar?<span class="acc__ic" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc__panel"><div><p>[Formas de pagamento e parcelamento aceitas pela clínica.]</p></div></div>
+          </div>
+          <div class="acc__item" data-reveal>
+            <h3><button type="button" aria-expanded="false">Quanto tempo dura um implante?<span class="acc__ic" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc__panel"><div><p>Com higiene adequada e revisões periódicas, um implante pode durar muitos anos. Na avaliação explicamos os cuidados para o seu caso.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4.11 CTA final -->
+    <section class="section cta" id="contato" aria-labelledby="t-cta">
+      <div class="wrap">
+        <div class="cta__card" data-reveal="card">
+          <div class="cta__mist" aria-hidden="true"></div>
+          <svg class="cta__tooth" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tooth"/></svg>
+          <div class="cta__copy">
+            <span class="slabel" data-reveal>Agende /</span>
+            <h2 class="cta__title" id="t-cta" data-split>
+              <span class="line"><span>Seu próximo sorriso</span></span>
+              <span class="line"><span>começa com uma conversa.</span></span>
+            </h2>
+            <div class="cta__btns" data-reveal style="--d:3">
+              <a class="btn btn--primary" href="#" data-wa>
+                <span class="btn__pill">Chamar no WhatsApp</span>
+                <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+              </a>
+              <a class="btn btn--ghost" href="#form-agenda">
+                <span class="btn__pill">Agendar pelo formulário</span>
+                <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+
+          <form class="form" id="form-agenda" novalidate data-form data-reveal style="--d:2">
+            <div class="field">
+              <label for="f-nome">Nome</label>
+              <input id="f-nome" name="nome" autocomplete="name" required aria-describedby="e-nome">
+              <span class="field__err" id="e-nome"></span>
+            </div>
+            <div class="field">
+              <label for="f-tel">Telefone / WhatsApp</label>
+              <input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required aria-describedby="e-tel">
+              <span class="field__err" id="e-tel"></span>
+            </div>
+            <div class="field">
+              <label for="f-trat">Tratamento de interesse</label>
+              <select id="f-trat" name="trat" required aria-describedby="e-trat">
+                <option value="">Selecione</option>
+                <option>Avaliação geral</option>
+                <option>Limpeza e prevenção</option>
+                <option>Clareamento</option>
+                <option>Lentes de contato dental</option>
+                <option>Implantes</option>
+                <option>Ortodontia / alinhadores</option>
+                <option>Odontopediatria</option>
+                <option>Tratamento de canal</option>
+              </select>
+              <span class="field__err" id="e-trat"></span>
+            </div>
+            <fieldset class="field">
+              <legend>Melhor período</legend>
+              <div class="seg">
+                <label><input type="radio" name="periodo" value="Manhã" checked><span>Manhã</span></label>
+                <label><input type="radio" name="periodo" value="Tarde"><span>Tarde</span></label>
+              </div>
+            </fieldset>
+            <div class="field field--check">
+              <label><input type="checkbox" name="lgpd" required aria-describedby="e-lgpd"><span class="box" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Concordo com o uso dos meus dados para contato, conforme a <a href="#">Política de Privacidade</a>.</span></label>
+              <span class="field__err" id="e-lgpd"></span>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit">
+              <span class="btn__pill">Enviar pedido</span>
+              <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+            </button>
+            <p class="form__ok" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 4.12 Rodapé -->
+  <footer class="footer">
+    <div class="wrap footer__grid" data-stagger>
+      <div data-reveal>
+        <a href="#topo" class="logo"><span class="logo__mark"><svg><use href="#i-tooth"/></svg></span><span class="logo__name">[NOME DA CLÍNICA]</span></a>
+        <p class="footer__muted">Responsável técnico: [NOME DO DENTISTA] — CRO-[UF] [NÚMERO]</p>
+      </div>
+      <div data-reveal>
+        <h3>Endereço</h3>
+        <p><svg class="fi"><use href="#i-pin"/></svg>[RUA, NÚMERO] — [BAIRRO], [CIDADE]/[UF]</p>
+        <p><svg class="fi"><use href="#i-clock"/></svg>Seg a sex 8h–19h · Sáb 8h–12h [confirmar]</p>
+      </div>
+      <div data-reveal>
+        <h3>Contato</h3>
+        <p><a href="tel:+55[DDD][TELEFONE]"><svg class="fi"><use href="#i-phone"/></svg>([DDD]) [TELEFONE]</a></p>
+        <p><a href="#" data-wa><svg class="fi"><use href="#i-chat"/></svg>WhatsApp</a></p>
+        <p><a href="[INSTAGRAM]"><svg class="fi"><use href="#i-insta"/></svg>@[instagram]</a></p>
+      </div>
+      <div class="map" data-reveal data-map>
+        <button type="button" class="map__btn" data-map-load><svg class="fi"><use href="#i-pin"/></svg>Carregar mapa</button>
+      </div>
+    </div>
+    <div class="wrap footer__bottom">
+      <span>© <span data-year></span> [NOME DA CLÍNICA]</span>
+      <a href="#">Política de Privacidade</a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp flutuante -->
+  <a class="wa-float" href="#" data-wa aria-label="Conversar no WhatsApp">
+    <svg><use href="#i-chat"/></svg>
+  </a>
+
+  <!-- Modal de tratamento -->
+  <dialog class="modal" data-modal aria-labelledby="m-title">
+    <div class="modal__card">
+      <button class="modal__close ctrl" type="button" data-modal-close aria-label="Fechar"><svg><use href="#i-x"/></svg></button>
+      <div class="modal__media"><img data-m-img alt=""></div>
+      <div class="modal__body">
+        <span class="slabel">Tratamento /</span>
+        <h2 id="m-title" data-m-title></h2>
+        <dl class="modal__dl">
+          <div><dt>O que é</dt><dd data-m-what></dd></div>
+          <div><dt>Para quem é</dt><dd data-m-who></dd></div>
+          <div><dt>Como funciona</dt><dd data-m-how></dd></div>
+          <div><dt>Duração média</dt><dd data-m-dur></dd></div>
+        </dl>
+        <a class="btn btn--primary" href="#" data-m-cta>
+          <span class="btn__pill">Agendar avaliação</span>
+          <span class="btn__circle" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
